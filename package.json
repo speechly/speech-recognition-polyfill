@@ -1,0 +1,11 @@
+{
+  "name": "@speechly/speech-recognition-polyfill",
+  "version": "1.0.0",
+  "description": "Polyfill for the Speech Recognition API using Speechly",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'TODO'"
+  },
+  "author": "",
+  "license": "MIT"
+}
