@@ -1,21 +1,5 @@
 import { Client, Segment } from '@speechly/browser-client'
-
-interface SpeechRecognitionAlternative {
-  transcript: string,
-  confidence: number
-}
-
-interface SpeechRecognitionResult {
-  0: SpeechRecognitionAlternative,
-  isFinal: boolean
-}
-
-interface SpeechRecognitionEvent {
-  results: SpeechRecognitionResult[],
-  resultIndex: number
-}
-
-type SpeechRecognitionEventCallback = (speechRecognitionEvent: SpeechRecognitionEvent) => void
+import { SpeechRecognitionEventCallback, SpeechRecognitionResult } from './types'
 
 const createSpeechlySpeechRecognition = (appId: string) => {
   return class SpeechlySpeechRecognition {
