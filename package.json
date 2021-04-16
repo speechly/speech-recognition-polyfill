@@ -2,10 +2,17 @@
   "name": "@speechly/speech-recognition-polyfill",
   "version": "1.0.0",
   "description": "Polyfill for the Speech Recognition API using Speechly",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "watch": "tsc -w",
     "test": "echo 'TODO'"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "@speechly/browser-client": "^1.0.11"
+  }
 }
