@@ -14,3 +14,7 @@ export interface SpeechRecognitionEvent {
 }
 
 export type SpeechRecognitionEventCallback = (speechRecognitionEvent: SpeechRecognitionEvent) => void
+
+export type SpeechEndCallback = () => void
+
+export type Class = new() => Object

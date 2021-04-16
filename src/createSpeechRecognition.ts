@@ -1,42 +1,54 @@
 import { Client, Segment } from '@speechly/browser-client'
-import { SpeechRecognitionEventCallback, SpeechRecognitionResult } from './types'
+import { SpeechRecognitionEventCallback, SpeechEndCallback, SpeechRecognitionResult, Class } from './types'
 
-const createSpeechlySpeechRecognition = (appId: string) => {
+const createSpeechlySpeechRecognition = (appId: string): Class => {
   return class SpeechlySpeechRecognition {
-    client = new Client({ appId })
-    clientInitialised = false
-    aborted = false
-    continuous = false
+    private client = new Client({ appId })
+    private clientInitialised = false
+    private aborted = false
+    private continuous = false
+
     onresult: SpeechRecognitionEventCallback = () => {}
-    onend = () => {}
+    onend: SpeechEndCallback = () => {}
 
     constructor() {
+      this.client = new Client({ appId })
       this.client.onSegmentChange(this.handleResult)
     }
-    
-    initialise = async () => {
+
+    public start = async(): Promise<void> => {
+      this.aborted = false
+      await this.initialise()
+      await this.client.startContext()
+    }
+
+    public stop = async(): Promise<void>  => {
+      await this._stop()
+    }
+
+    public abort = async(): Promise<void>  => {
+      this.aborted = true
+      await this._stop()
+    }
+
+    private initialise = async(): Promise<void>  => {
       if (!this.clientInitialised) {
         await this.client.initialize()
         this.clientInitialised = true
       }
     }
 
-    start = async () => {
-      this.aborted = false
+    private _stop = async(): Promise<void>  => {
       await this.initialise()
-      await this.client.startContext()
+      try {
+        await this.client.stopContext()
+        this.onend()
+      } catch (e) {
+        // swallow
+      }
     }
 
-    stop = async () => {
-      await this._stop()
-    }
-
-    abort = async () => {
-      this.aborted = true
-      await this._stop()
-    }
-
-    handleResult = (segment: Segment) => {
+    private handleResult = (segment: Segment): void => {
       if (this.aborted) {
         return
       }
@@ -51,16 +63,6 @@ const createSpeechlySpeechRecognition = (appId: string) => {
       this.onresult({ results, resultIndex: 0 })
       if (!this.continuous && segment.isFinal) {
         this.abort()
-      }
-    }
-
-    _stop = async () => {
-      await this.initialise()
-      try {
-        await this.client.stopContext()
-        this.onend()
-      } catch (e) {
-        // swallow
       }
     }
   }
