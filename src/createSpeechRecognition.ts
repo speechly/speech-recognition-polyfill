@@ -6,8 +6,8 @@ const createSpeechlySpeechRecognition = (appId: string): Class => {
     private client = new Client({ appId })
     private clientInitialised = false
     private aborted = false
-    private continuous = false
 
+    continuous = false
     onresult: SpeechRecognitionEventCallback = () => {}
     onend: SpeechEndCallback = () => {}
 
