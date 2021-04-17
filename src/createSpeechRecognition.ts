@@ -1,9 +1,15 @@
 import { Client, Segment } from '@speechly/browser-client'
-import { SpeechRecognitionEventCallback, SpeechEndCallback, SpeechRecognitionResult, Class } from './types'
+import {
+  SpeechRecognitionEventCallback,
+  SpeechEndCallback,
+  SpeechRecognitionResult,
+  SpeechRecognitionClass,
+  SpeechRecognition
+} from './types'
 
-const createSpeechlySpeechRecognition = (appId: string): Class => {
-  return class SpeechlySpeechRecognition {
-    private client = new Client({ appId })
+const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitionClass => {
+ return class SpeechlySpeechRecognition implements SpeechRecognition {
+    private client: Client
     private clientInitialised = false
     private aborted = false
 

@@ -17,4 +17,13 @@ export type SpeechRecognitionEventCallback = (speechRecognitionEvent: SpeechReco
 
 export type SpeechEndCallback = () => void
 
-export type Class = new() => Object
+export interface SpeechRecognition {
+  continuous: boolean,
+  onresult: SpeechRecognitionEventCallback,
+  onend: SpeechEndCallback,
+  start: () => Promise<void>,
+  stop: () => Promise<void>,
+  abort: () => Promise<void>,
+}
+
+export type SpeechRecognitionClass = new() => SpeechRecognition
