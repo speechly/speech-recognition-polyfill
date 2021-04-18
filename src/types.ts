@@ -1,15 +1,15 @@
 export interface SpeechRecognitionAlternative {
-  transcript: string,
+  transcript: string
   confidence: number
 }
 
 export interface SpeechRecognitionResult {
-  0: SpeechRecognitionAlternative,
+  0: SpeechRecognitionAlternative
   isFinal: boolean
 }
 
 export interface SpeechRecognitionEvent {
-  results: SpeechRecognitionResult[],
+  results: SpeechRecognitionResult[]
   resultIndex: number
 }
 
@@ -18,13 +18,13 @@ export type SpeechRecognitionEventCallback = (speechRecognitionEvent: SpeechReco
 export type SpeechEndCallback = () => void
 
 export interface SpeechRecognition {
-  continuous: boolean,
-  interimResults: boolean,
-  onresult: SpeechRecognitionEventCallback,
-  onend: SpeechEndCallback,
-  start: () => Promise<void>,
-  stop: () => Promise<void>,
-  abort: () => Promise<void>,
+  continuous: boolean
+  interimResults: boolean
+  onresult: SpeechRecognitionEventCallback
+  onend: SpeechEndCallback
+  start: () => Promise<void>
+  stop: () => Promise<void>
+  abort: () => Promise<void>
 }
 
-export type SpeechRecognitionClass = new() => SpeechRecognition
+export type SpeechRecognitionClass = new () => SpeechRecognition
