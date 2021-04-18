@@ -19,6 +19,7 @@ export type SpeechEndCallback = () => void
 
 export interface SpeechRecognition {
   continuous: boolean,
+  interimResults: boolean,
   onresult: SpeechRecognitionEventCallback,
   onend: SpeechEndCallback,
   start: () => Promise<void>,

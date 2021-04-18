@@ -14,6 +14,7 @@ const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitionClass 
     private aborted = false
 
     continuous = false
+    interimResults = false
     onresult: SpeechRecognitionEventCallback = () => {}
     onend: SpeechEndCallback = () => {}
 
@@ -56,6 +57,9 @@ const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitionClass 
 
     private handleResult = (segment: Segment): void => {
       if (this.aborted) {
+        return
+      }
+      if (!this.interimResults && !segment.isFinal) {
         return
       }
       const transcript = segment.words.map(x => x.value).filter(x => x).join(' ')
