@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SpeechRecognition from 'react-speech-recognition'
-import Dictaphones from './Dictaphones';
+import Dictaphone from './Dictaphone';
 import { createSpeechlySpeechRecognition } from './SpeechlySpeechRecognition'
 
 const appId = process.env.REACT_APP_APP_ID
@@ -10,7 +10,7 @@ SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Dictaphones />
+    <Dictaphone />
   </React.StrictMode>,
   document.getElementById('root')
 );
