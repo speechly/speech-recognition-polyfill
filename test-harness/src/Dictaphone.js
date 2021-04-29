@@ -39,7 +39,9 @@ export default () => {
       </div>
       <div
         className={STYLES.Dictaphone__holdToTalk}
+        onTouchStart={listenContinuously}
         onMouseDown={listenContinuously}
+        onTouchEnd={SpeechRecognition.stopListening}
         onMouseUp={SpeechRecognition.stopListening}
       >Hold to talk</div>
       <button onClick={listenOnce}>Listen once</button>
