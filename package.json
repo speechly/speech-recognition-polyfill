@@ -9,7 +9,8 @@
     "update-test-harness": "tsc && cp -R dist/ test-harness/src/SpeechlySpeechRecognition",
     "run-test-harness": "cd test-harness && npm i && npm start",
     "dev": "npm-watch update-test-harness & npm run update-test-harness && npm run run-test-harness",
-    "test": "echo 'TODO'"
+    "test": "jest --config ./jest.config.js",
+    "test:watch": "jest --watch --config ./jest.config.js"
   },
   "watch": {
     "update-test-harness": {
