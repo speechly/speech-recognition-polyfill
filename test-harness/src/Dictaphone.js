@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 
+import STYLES from './Dictaphone.module.css'
+
 export default () => {
   const {
     transcript,
@@ -30,11 +32,16 @@ export default () => {
 
   return (
     <div>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div className={STYLES.Dictaphone}>
         <span>Listening: {listening ? 'on' : 'off'}</span>
         <button onClick={resetTranscript}>Reset</button>
         <span>{transcript}</span>
       </div>
+      <div
+        className={STYLES.Dictaphone__holdToTalk}
+        onMouseDown={listenContinuously}
+        onMouseUp={SpeechRecognition.stopListening}
+      >Hold to talk</div>
       <button onClick={listenOnce}>Listen once</button>
       <button onClick={listenContinuously}>Listen continuously</button>
       <button onClick={SpeechRecognition.stopListening}>Stop</button>
