@@ -12,6 +12,7 @@ const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitionClass 
     private readonly client: Client
     private clientInitialised = false
     private aborted = false
+    private transcribing = false
 
     continuous = false
     interimResults = false
@@ -27,6 +28,7 @@ const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitionClass 
       this.aborted = false
       await this.initialise()
       await this.client.startContext()
+      this.transcribing = true
     }
 
     public stop = async (): Promise<void> => {
@@ -46,9 +48,13 @@ const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitionClass 
     }
 
     private readonly _stop = async (): Promise<void> => {
+      if (!this.transcribing) {
+        return
+      }
       await this.initialise()
       try {
         await this.client.stopContext()
+        this.transcribing = false
         this.onend()
       } catch (e) {
         // swallow errors
