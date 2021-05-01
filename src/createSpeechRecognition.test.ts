@@ -58,7 +58,7 @@ const expectSentenceToBeTranscribedWithInterimAndFinalResults = (sentence: any, 
       isFinal: false,
     },
   ], resultIndex: 0})
-  for (let i = startIndex + 2; i < startIndex + 11; i += 1) {
+  for (let i = startIndex + 2; i < startIndex + sentence.length - 1; i += 1) {
     expect(mockOnResult).toHaveBeenNthCalledWith(i, { results: [
       {
         0: {
@@ -69,7 +69,7 @@ const expectSentenceToBeTranscribedWithInterimAndFinalResults = (sentence: any, 
       },
     ], resultIndex: 0})
   }
-  expect(mockOnResult).toHaveBeenNthCalledWith(startIndex + 11, { results: [
+  expect(mockOnResult).toHaveBeenNthCalledWith(startIndex + sentence.length - 1, { results: [
     {
       0: {
         transcript: `SENTENCE ${secondWord}`,
@@ -160,9 +160,9 @@ describe('createSpeechlySpeechRecognition', () => {
     speak(SENTENCE_ONE);
     speak(SENTENCE_TWO);
 
-    expect(mockOnResult).toHaveBeenCalledTimes(24);
+    expect(mockOnResult).toHaveBeenCalledTimes(SENTENCE_ONE.length + SENTENCE_TWO.length);
     expectSentenceToBeTranscribedWithInterimAndFinalResults(SENTENCE_ONE, mockOnResult);
-    expectSentenceToBeTranscribedWithInterimAndFinalResults(SENTENCE_TWO, mockOnResult, 13);
+    expectSentenceToBeTranscribedWithInterimAndFinalResults(SENTENCE_TWO, mockOnResult, SENTENCE_ONE.length + 1);
   })
 
   it('transcribes only one of two utterances when continuous is turned off (interimResults: true)', async () => {
@@ -176,7 +176,7 @@ describe('createSpeechlySpeechRecognition', () => {
     speak(SENTENCE_ONE);
     speak(SENTENCE_TWO);
 
-    expect(mockOnResult).toHaveBeenCalledTimes(12);
+    expect(mockOnResult).toHaveBeenCalledTimes(SENTENCE_ONE.length);
     expectSentenceToBeTranscribedWithInterimAndFinalResults(SENTENCE_ONE, mockOnResult);
   })
 })
