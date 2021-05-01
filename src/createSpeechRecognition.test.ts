@@ -8,8 +8,8 @@ import TEST_DATA from './testData';
 
 const { SENTENCE_ONE, SENTENCE_TWO } = TEST_DATA;
 
-let _callback: any;
-const mockOnSegmentChange = jest.fn((callback: any) => {
+let _callback;
+const mockOnSegmentChange = jest.fn((callback) => {
   _callback = callback;
 });
 const mockInitialize = jest.fn(() => Promise.resolve());
@@ -26,11 +26,11 @@ jest.mock('@speechly/browser-client', () => ({
   }
 }));
 
-const speak = (sentence: any) => {
+const speak = (sentence) => {
   sentence.forEach(_callback)
 }
 
-const speakAndInterrupt = (sentence: any, interrupt: Function) => {
+const speakAndInterrupt = (sentence, interrupt) => {
   _callback(sentence[0]);
   interrupt();
   sentence.slice(1).forEach(_callback);
