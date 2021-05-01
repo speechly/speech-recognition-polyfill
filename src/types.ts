@@ -27,6 +27,7 @@ export interface SpeechRecognitionEvent {
 
 /**
  * Callback that is invoked whenever the transcript gets updated
+ * @param speechRecognitionEvent - Event containing updates to the transcript
  * @alpha
  */
 export type SpeechRecognitionEventCallback = (speechRecognitionEvent: SpeechRecognitionEvent) => void
@@ -58,6 +59,7 @@ export interface SpeechRecognition {
   onresult: SpeechRecognitionEventCallback
   /**
    * Callback that is invoked when transcription ends
+   * @param speechRecognitionEvent - Event containing updates to the transcript
    */
   onend: SpeechEndCallback
   /**
