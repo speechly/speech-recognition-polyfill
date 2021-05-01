@@ -8,7 +8,7 @@ import TEST_DATA from './testData';
 
 const { SENTENCE_ONE, SENTENCE_TWO } = TEST_DATA;
 
-let _callback;
+let _callback: any;
 const mockOnSegmentChange = jest.fn((callback) => {
   _callback = callback;
 });
@@ -26,11 +26,11 @@ jest.mock('@speechly/browser-client', () => ({
   }
 }));
 
-const speak = (sentence) => {
+const speak = (sentence: any) => {
   sentence.forEach(_callback)
 }
 
-const speakAndInterrupt = (sentence, interrupt) => {
+const speakAndInterrupt = (sentence: any, interrupt: any) => {
   _callback(sentence[0]);
   interrupt();
   sentence.slice(1).forEach(_callback);
