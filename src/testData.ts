@@ -4,8 +4,6 @@ const TEST_DATA = [
     contextId: '6b742e79-bd6d-4f28-a4d9-aeae71c54728',
     isFinal: false,
     words: [
-      null,
-      null,
       {
         value: 'SENT',
         index: 2,
@@ -25,8 +23,6 @@ const TEST_DATA = [
     contextId: '6b742e79-bd6d-4f28-a4d9-aeae71c54728',
     isFinal: false,
     words: [
-      null,
-      null,
       {
         value: 'SENTENCE',
         index: 2,
@@ -46,8 +42,6 @@ const TEST_DATA = [
     contextId: '6b742e79-bd6d-4f28-a4d9-aeae71c54728',
     isFinal: false,
     words: [
-      null,
-      null,
       {
         value: 'SENTENCE',
         index: 2,
@@ -74,8 +68,6 @@ const TEST_DATA = [
     contextId: '6b742e79-bd6d-4f28-a4d9-aeae71c54728',
     isFinal: false,
     words: [
-      null,
-      null,
       {
         value: 'SENTENCE',
         index: 2,
@@ -102,8 +94,6 @@ const TEST_DATA = [
     contextId: '6b742e79-bd6d-4f28-a4d9-aeae71c54728',
     isFinal: false,
     words: [
-      null,
-      null,
       {
         value: 'SENTENCE',
         index: 2,
@@ -130,8 +120,6 @@ const TEST_DATA = [
     contextId: '6b742e79-bd6d-4f28-a4d9-aeae71c54728',
     isFinal: false,
     words: [
-      null,
-      null,
       {
         value: 'SENTENCE',
         index: 2,
@@ -158,8 +146,6 @@ const TEST_DATA = [
     contextId: '6b742e79-bd6d-4f28-a4d9-aeae71c54728',
     isFinal: false,
     words: [
-      null,
-      null,
       {
         value: 'SENTENCE',
         index: 2,
@@ -186,8 +172,6 @@ const TEST_DATA = [
     contextId: '6b742e79-bd6d-4f28-a4d9-aeae71c54728',
     isFinal: false,
     words: [
-      null,
-      null,
       {
         value: 'SENTENCE',
         index: 2,
@@ -214,8 +198,6 @@ const TEST_DATA = [
     contextId: '6b742e79-bd6d-4f28-a4d9-aeae71c54728',
     isFinal: false,
     words: [
-      null,
-      null,
       {
         value: 'SENTENCE',
         index: 2,
@@ -242,8 +224,6 @@ const TEST_DATA = [
     contextId: '6b742e79-bd6d-4f28-a4d9-aeae71c54728',
     isFinal: false,
     words: [
-      null,
-      null,
       {
         value: 'SENTENCE',
         index: 2,
@@ -270,8 +250,6 @@ const TEST_DATA = [
     contextId: '6b742e79-bd6d-4f28-a4d9-aeae71c54728',
     isFinal: false,
     words: [
-      null,
-      null,
       {
         value: 'SENTENCE',
         index: 2,
