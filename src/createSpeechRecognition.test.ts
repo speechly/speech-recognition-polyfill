@@ -227,7 +227,7 @@ describe('createSpeechlySpeechRecognition', () => {
     expect(mockOnEnd).toHaveBeenCalledTimes(1);
   })
 
-  it('calling stop does not prevent remaining segments from being transcribed', async () => {
+  it('calling stop does not prevent ongoing utterance from being transcribed', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
     const mockOnResult = jest.fn();
@@ -243,7 +243,7 @@ describe('createSpeechlySpeechRecognition', () => {
     expectSentenceToBeTranscribedWithInterimAndFinalResults(SENTENCE_ONE, mockOnResult);
   })
 
-  it('calling abort prevents remaining segments from being transcribed', async () => {
+  it('calling abort prevents ongoing utterance from being transcribed', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
     const mockOnResult = jest.fn();
@@ -254,6 +254,40 @@ describe('createSpeechlySpeechRecognition', () => {
 
     await speechRecognition.start();
     speakAndInterrupt(SENTENCE_ONE, speechRecognition.abort);
+
+    expect(mockOnResult).toHaveBeenCalledTimes(1);
+    expectSentenceToBeTranscribedWithFirstInitialResult(SENTENCE_ONE, mockOnResult);
+  })
+
+  it('calling stop prevents subsequent utterances from being transcribed', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+    const mockOnResult = jest.fn();
+    speechRecognition.onresult = mockOnResult;
+    const mockOnEnd = jest.fn();
+    speechRecognition.onend = mockOnEnd;
+    speechRecognition.interimResults = true;
+
+    await speechRecognition.start();
+    speakAndInterrupt(SENTENCE_ONE, speechRecognition.stop);
+    speak(SENTENCE_TWO);
+
+    expect(mockOnResult).toHaveBeenCalledTimes(SENTENCE_ONE.length);
+    expectSentenceToBeTranscribedWithInterimAndFinalResults(SENTENCE_ONE, mockOnResult);
+  })
+
+  it('calling abort prevents subsequent utterances from being transcribed', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+    const mockOnResult = jest.fn();
+    speechRecognition.onresult = mockOnResult;
+    const mockOnEnd = jest.fn();
+    speechRecognition.onend = mockOnEnd;
+    speechRecognition.interimResults = true;
+
+    await speechRecognition.start();
+    speakAndInterrupt(SENTENCE_ONE, speechRecognition.abort);
+    speak(SENTENCE_TWO);
 
     expect(mockOnResult).toHaveBeenCalledTimes(1);
     expectSentenceToBeTranscribedWithFirstInitialResult(SENTENCE_ONE, mockOnResult);
