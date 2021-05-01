@@ -7,7 +7,15 @@ import {
   SpeechRecognition,
 } from './types'
 
-const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitionClass => {
+/**
+ * Returns a SpeechRecognition implementation that uses a given Speechly app ID
+ * to generate transcriptions using the Speechly API
+ *
+ * @param appId - Speechly app ID
+ * @returns Class that implements the SpeechRecognition interface
+ * @alpha
+ */
+export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitionClass => {
   return class SpeechlySpeechRecognition implements SpeechRecognition {
     private readonly client: Client
     private clientInitialised = false
