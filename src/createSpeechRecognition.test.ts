@@ -1,6 +1,8 @@
 import createSpeechlySpeechRecognition from './createSpeechRecognition';
 import TEST_DATA from './testData';
 
+const { SENTENCE_ONE, SENTENCE_TWO } = TEST_DATA;
+
 let _callback: any;
 const mockOnSegmentChange = jest.fn((callback: any) => {
   _callback = callback;
@@ -19,8 +21,63 @@ jest.mock('@speechly/browser-client', () => ({
   }
 }));
 
-const speak = () => {
-  TEST_DATA.forEach(_callback)
+const speak = (sentence: any) => {
+  sentence.forEach(_callback)
+}
+
+const expectSentenceToBeTranscribedWithFinalResult = (sentence: any, mockOnResult: any, startIndex = 1) => {
+  const secondWord = sentence === SENTENCE_ONE ? 'ONE': 'TWO';
+  expect(mockOnResult).toHaveBeenNthCalledWith(startIndex, { results: [
+    {
+      0: {
+        transcript: `SENTENCE ${secondWord}`,
+        confidence: 1,
+      },
+      isFinal: true,
+    },
+  ], resultIndex: 0})
+}
+
+const expectSentenceToBeTranscribedWithInterimAndFinalResults = (sentence: any, mockOnResult: any, startIndex = 1) => {
+  const secondWord = sentence === SENTENCE_ONE ? 'ONE': 'TWO';
+  expect(mockOnResult).toHaveBeenNthCalledWith(startIndex, { results: [
+    {
+      0: {
+        transcript: 'SENT',
+        confidence: 1,
+      },
+      isFinal: false,
+    },
+  ], resultIndex: 0})
+  expect(mockOnResult).toHaveBeenNthCalledWith(startIndex + 1, { results: [
+    {
+      0: {
+        transcript: 'SENTENCE',
+        confidence: 1,
+      },
+      isFinal: false,
+    },
+  ], resultIndex: 0})
+  for (let i = startIndex + 2; i < startIndex + 11; i += 1) {
+    expect(mockOnResult).toHaveBeenNthCalledWith(i, { results: [
+      {
+        0: {
+          transcript: `SENTENCE ${secondWord}`,
+          confidence: 1,
+        },
+        isFinal: false,
+      },
+    ], resultIndex: 0})
+  }
+  expect(mockOnResult).toHaveBeenNthCalledWith(startIndex + 11, { results: [
+    {
+      0: {
+        transcript: `SENTENCE ${secondWord}`,
+        confidence: 1,
+      },
+      isFinal: true,
+    },
+  ], resultIndex: 0})
 }
 
 describe('createSpeechlySpeechRecognition', () => {
@@ -34,39 +91,20 @@ describe('createSpeechlySpeechRecognition', () => {
     expect(mockStartContext).toHaveBeenCalledTimes(1);
   })
 
-  it('calls given onresult for only the final result by default when transcribing', async () => {
+  it('calls given onresult for only the final result (interimResults: false)', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
     const mockOnResult = jest.fn();
     speechRecognition.onresult = mockOnResult;
 
     await speechRecognition.start();
-    speak();
+    speak(SENTENCE_ONE);
 
     expect(mockOnResult).toHaveBeenCalledTimes(1);
+    expectSentenceToBeTranscribedWithFinalResult(SENTENCE_ONE, mockOnResult);
   })
 
-  it('calls given onresult for only the final result with expected results by default when transcribing', async () => {
-    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
-    const speechRecognition = new SpeechRecognition();
-    const mockOnResult = jest.fn();
-    speechRecognition.onresult = mockOnResult;
-
-    await speechRecognition.start();
-    speak();
-
-    expect(mockOnResult).toHaveBeenNthCalledWith(1, { results: [
-      {
-        0: {
-          transcript: 'SENTENCE ONE',
-          confidence: 1,
-        },
-        isFinal: true,
-      },
-    ], resultIndex: 0})
-  })
-
-  it('calls given onresult for each interim or final result when transcribing interim results', async () => {
+  it('calls given onresult for each interim or final result (interimResults: true)', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
     const mockOnResult = jest.fn();
@@ -74,12 +112,60 @@ describe('createSpeechlySpeechRecognition', () => {
     speechRecognition.interimResults = true;
 
     await speechRecognition.start();
-    speak();
+    speak(SENTENCE_ONE);
 
-    expect(mockOnResult).toHaveBeenCalledTimes(TEST_DATA.length);
+    expect(mockOnResult).toHaveBeenCalledTimes(SENTENCE_ONE.length);
+    expectSentenceToBeTranscribedWithInterimAndFinalResults(SENTENCE_ONE, mockOnResult);
   })
 
-  it('calls given onresult for each interim or final result with expected results when transcribing interim results', async () => {
+  it('transcribes two utterances when continuous is turned on (interimResults: false)', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+    const mockOnResult = jest.fn();
+    speechRecognition.onresult = mockOnResult;
+    speechRecognition.continuous = true;
+
+    await speechRecognition.start();
+    speak(SENTENCE_ONE);
+    speak(SENTENCE_TWO);
+
+    expect(mockOnResult).toHaveBeenCalledTimes(2);
+    expectSentenceToBeTranscribedWithFinalResult(SENTENCE_ONE, mockOnResult);
+    expectSentenceToBeTranscribedWithFinalResult(SENTENCE_TWO, mockOnResult, 2);
+  })
+
+  it('transcribes only one of two utterances when continuous is turned off (interimResults: false)', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+    const mockOnResult = jest.fn();
+    speechRecognition.onresult = mockOnResult;
+
+    await speechRecognition.start();
+    speak(SENTENCE_ONE);
+    speak(SENTENCE_TWO);
+
+    expect(mockOnResult).toHaveBeenCalledTimes(1);
+    expectSentenceToBeTranscribedWithFinalResult(SENTENCE_ONE, mockOnResult);
+  })
+
+  it('transcribes two utterances when continuous is turned on (interimResults: true)', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+    const mockOnResult = jest.fn();
+    speechRecognition.onresult = mockOnResult;
+    speechRecognition.interimResults = true;
+    speechRecognition.continuous = true;
+
+    await speechRecognition.start();
+    speak(SENTENCE_ONE);
+    speak(SENTENCE_TWO);
+
+    expect(mockOnResult).toHaveBeenCalledTimes(24);
+    expectSentenceToBeTranscribedWithInterimAndFinalResults(SENTENCE_ONE, mockOnResult);
+    expectSentenceToBeTranscribedWithInterimAndFinalResults(SENTENCE_TWO, mockOnResult, 13);
+  })
+
+  it('transcribes only one of two utterances when continuous is turned off (interimResults: true)', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
     const mockOnResult = jest.fn();
@@ -87,45 +173,10 @@ describe('createSpeechlySpeechRecognition', () => {
     speechRecognition.interimResults = true;
 
     await speechRecognition.start();
-    speak();
+    speak(SENTENCE_ONE);
+    speak(SENTENCE_TWO);
 
-    expect(mockOnResult).toHaveBeenNthCalledWith(1, { results: [
-      {
-        0: {
-          transcript: 'SENT',
-          confidence: 1,
-        },
-        isFinal: false,
-      },
-    ], resultIndex: 0})
-    expect(mockOnResult).toHaveBeenNthCalledWith(2, { results: [
-      {
-        0: {
-          transcript: 'SENTENCE',
-          confidence: 1,
-        },
-        isFinal: false,
-      },
-    ], resultIndex: 0})
-    for (let i = 3; i < 12; i += 1) {
-      expect(mockOnResult).toHaveBeenNthCalledWith(i, { results: [
-        {
-          0: {
-            transcript: 'SENTENCE ONE',
-            confidence: 1,
-          },
-          isFinal: false,
-        },
-      ], resultIndex: 0})
-    }
-    expect(mockOnResult).toHaveBeenNthCalledWith(12, { results: [
-      {
-        0: {
-          transcript: 'SENTENCE ONE',
-          confidence: 1,
-        },
-        isFinal: true,
-      },
-    ], resultIndex: 0})
+    expect(mockOnResult).toHaveBeenCalledTimes(12);
+    expectSentenceToBeTranscribedWithInterimAndFinalResults(SENTENCE_ONE, mockOnResult);
   })
 })
