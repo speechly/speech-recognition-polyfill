@@ -81,6 +81,13 @@ const expectSentenceToBeTranscribedWithInterimAndFinalResults = (sentence: any, 
 }
 
 describe('createSpeechlySpeechRecognition', () => {
+  beforeEach(() => {
+    mockInitialize.mockClear();
+    mockStartContext.mockClear();
+    mockStopContext.mockClear();
+    mockOnSegmentChange.mockClear();
+  });
+
   it('calls initialize and startContext on Speechly client when starting transcription', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
@@ -178,5 +185,18 @@ describe('createSpeechlySpeechRecognition', () => {
 
     expect(mockOnResult).toHaveBeenCalledTimes(SENTENCE_ONE.length);
     expectSentenceToBeTranscribedWithInterimAndFinalResults(SENTENCE_ONE, mockOnResult);
+  })
+
+  it('does not call initialize, stopContext or onend when stopping already-stopped transcription', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+    const mockOnEnd = jest.fn();
+    speechRecognition.onend = mockOnEnd;
+
+    await speechRecognition.stop();
+
+    expect(mockInitialize).toHaveBeenCalledTimes(0);
+    expect(mockStopContext).toHaveBeenCalledTimes(0);
+    expect(mockOnEnd).toHaveBeenCalledTimes(0);
   })
 })
