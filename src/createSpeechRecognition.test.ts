@@ -34,6 +34,38 @@ describe('createSpeechlySpeechRecognition', () => {
     expect(mockStartContext).toHaveBeenCalledTimes(1);
   })
 
+  it('calls given onresult for only the final result by default when transcribing', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+    const mockOnResult = jest.fn();
+    speechRecognition.onresult = mockOnResult;
+
+    await speechRecognition.start();
+    speak();
+
+    expect(mockOnResult).toHaveBeenCalledTimes(1);
+  })
+
+  it('calls given onresult for only the final result with expected results by default when transcribing', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+    const mockOnResult = jest.fn();
+    speechRecognition.onresult = mockOnResult;
+
+    await speechRecognition.start();
+    speak();
+
+    expect(mockOnResult).toHaveBeenNthCalledWith(1, { results: [
+      {
+        0: {
+          transcript: 'SENTENCE ONE',
+          confidence: 1,
+        },
+        isFinal: true,
+      },
+    ], resultIndex: 0})
+  })
+
   it('calls given onresult for each interim or final result when transcribing interim results', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
