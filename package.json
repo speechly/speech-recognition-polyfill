@@ -11,7 +11,7 @@
     "dev": "npm-watch update-test-harness & npm run update-test-harness && npm run run-test-harness",
     "test": "jest --config ./jest.config.js",
     "test:watch": "jest --watch --config ./jest.config.js",
-    "docs": "typedoc --readme none src/index.ts",
+    "docs": "typedoc --readme none --gitRevision HEAD src/index.ts",
     "api-extractor": "tsc && api-extractor run --local --verbose"
   },
   "watch": {

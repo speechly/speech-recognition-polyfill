@@ -21,7 +21,7 @@ Transcript for the ongoing utterance, including the level of confidence in that 
 
 Level of confidence in the correctness of the transcript (from 0 to 1)
 
-Defined in: [types.ts:13](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L13)
+Defined in: [types.ts:13](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L13)
 
 ___
 
@@ -31,4 +31,4 @@ ___
 
 Current transcript of the ongoing utterance (the words spoken by the user)
 
-Defined in: [types.ts:9](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L9)
+Defined in: [types.ts:9](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L9)

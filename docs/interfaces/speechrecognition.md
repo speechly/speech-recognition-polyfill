@@ -33,9 +33,9 @@ Stop transcribing utterances received from the microphone, and cut off the curre
 
 **Returns:** *Promise*<void\>
 
-Defined in: [types.ts:101](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L101)
+Defined in: [types.ts:101](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L101)
 
-Defined in: [types.ts:101](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L101)
+Defined in: [types.ts:101](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L101)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 Should the microphone listen continuously (true) or should it stop after the first utterance (false)?
 
-Defined in: [types.ts:75](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L75)
+Defined in: [types.ts:75](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L75)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 Should interim results be emitted? These are parts of an ongoing utterance for which transcription hasn't
 completed yet
 
-Defined in: [types.ts:80](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L80)
+Defined in: [types.ts:80](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L80)
 
 ___
 
@@ -68,7 +68,7 @@ Callback that is invoked when transcription ends
 
 **`param`** Event containing updates to the transcript
 
-Defined in: [types.ts:89](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L89)
+Defined in: [types.ts:89](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L89)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 Callback that is invoked whenever the transcript updates
 
-Defined in: [types.ts:84](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L84)
+Defined in: [types.ts:84](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L84)
 
 ___
 
@@ -94,9 +94,9 @@ Start transcribing utterances received from the microphone
 
 **Returns:** *Promise*<void\>
 
-Defined in: [types.ts:93](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L93)
+Defined in: [types.ts:93](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L93)
 
-Defined in: [types.ts:93](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L93)
+Defined in: [types.ts:93](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L93)
 
 ___
 
@@ -112,6 +112,6 @@ Stop transcribing utterances received from the microphone, but finish processing
 
 **Returns:** *Promise*<void\>
 
-Defined in: [types.ts:97](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L97)
+Defined in: [types.ts:97](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L97)
 
-Defined in: [types.ts:97](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L97)
+Defined in: [types.ts:97](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L97)

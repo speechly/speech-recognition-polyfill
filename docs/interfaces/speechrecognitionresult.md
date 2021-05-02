@@ -24,7 +24,7 @@ structure used in the native [SpeechRecognitionResult spec](https://developer.mo
 which contains an "array" of alternative transcripts. In the Speechly implementation, there is never more than one
 alternative, so only the first index is specified in the interface
 
-Defined in: [types.ts:20](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L20)
+Defined in: [types.ts:20](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L20)
 
 ___
 
@@ -35,4 +35,4 @@ ___
 Is this transcript "final"? That is, has the transcription algorithm concluded that the utterance has finished and
 that the trancript will have no further updates?
 
-Defined in: [types.ts:32](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L32)
+Defined in: [types.ts:32](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L32)

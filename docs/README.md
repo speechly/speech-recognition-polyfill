@@ -45,7 +45,7 @@ Callback that is invoked when transcription ends
 
 **Returns:** *void*
 
-Defined in: [types.ts:64](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L64)
+Defined in: [types.ts:64](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L64)
 
 ___
 
@@ -63,7 +63,7 @@ Class that implements the SpeechRecognition interface
 
 **Returns:** [*SpeechRecognition*](interfaces/speechrecognition.md)
 
-Defined in: [types.ts:108](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L108)
+Defined in: [types.ts:108](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L108)
 
 ___
 
@@ -89,7 +89,7 @@ Callback that is invoked whenever the transcript gets updated
 
 **Returns:** *void*
 
-Defined in: [types.ts:58](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/types.ts#L58)
+Defined in: [types.ts:58](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L58)
 
 ## Functions
 
@@ -112,4 +112,4 @@ to generate transcriptions using the Speechly API
 
 Class that implements the SpeechRecognition interface
 
-Defined in: [createSpeechRecognition.ts:20](https://github.com/JamesBrill/speech-recognition-polyfill/blob/a3993a8/src/createSpeechRecognition.ts#L20)
+Defined in: [createSpeechRecognition.ts:18](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/createSpeechRecognition.ts#L18)
