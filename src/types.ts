@@ -3,7 +3,13 @@
  * @alpha
  */
 export interface SpeechRecognitionAlternative {
+  /**
+   * Current transcript of the ongoing utterance (the words spoken by the user)
+   */
   transcript: string
+  /**
+   * Level of confidence in the correctness of the transcript (from 0 to 1)
+   */
   confidence: number
 }
 
@@ -12,7 +18,17 @@ export interface SpeechRecognitionAlternative {
  * @alpha
  */
 export interface SpeechRecognitionResult {
+  /**
+   * Object containing a transcript for the ongoing utterance (the use of an integer index key is to mimic the
+   * structure used in the native {@link https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognitionResult | SpeechRecognitionResult spec}),
+   * which contains an "array" of alternative transcripts. In the Speechly implementation, there is never more than one
+   * alternative, so only the first index is specified in the interface
+   */
   0: SpeechRecognitionAlternative
+  /**
+   * Is this transcript "final"? That is, has the transcription algorithm concluded that the utterance has finished and
+   * that the trancript will have no further updates?
+   */
   isFinal: boolean
 }
 
@@ -21,7 +37,16 @@ export interface SpeechRecognitionResult {
  * @alpha
  */
 export interface SpeechRecognitionEvent {
+  /**
+   * List of speech recognition results, containing all transcripts collected in the current session. This represents the
+   * native {@link https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognitionResultList | SpeechRecognitionResultList}.
+   * Note that the Speechly implementation currently does not maintain a history of results, only returning the single
+   * result for the ongoing utterance
+   */
   results: SpeechRecognitionResult[]
+  /**
+   * Index of the earliest speech recognition result that has changed
+   */
   resultIndex: number
 }
 
