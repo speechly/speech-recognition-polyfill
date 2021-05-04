@@ -11,7 +11,8 @@ module.exports = {
   moduleFileExtensions: ['ts', 'js'],
   testPathIgnorePatterns: [
     '/node_modules/',
-    '/dist/'
+    '/dist/',
+    '/test-harness/'
   ],
   modulePathIgnorePatterns: ['/dist/'],
 };
