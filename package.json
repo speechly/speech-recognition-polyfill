@@ -1,6 +1,6 @@
 {
   "name": "speech-recognition-polyfill",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Polyfill for the Speech Recognition API using Speechly",
   "main": "dist/index.js",
   "types": "dist/types.d.ts",
