@@ -1,5 +1,5 @@
 {
-  "name": "@speechly/speech-recognition-polyfill",
+  "name": "speech-recognition-polyfill",
   "version": "0.0.1",
   "description": "Polyfill for the Speech Recognition API using Speechly",
   "main": "dist/index.js",
