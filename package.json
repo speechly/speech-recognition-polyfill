@@ -1,9 +1,9 @@
 {
   "name": "speech-recognition-polyfill",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Polyfill for the Speech Recognition API using Speechly",
-  "main": "dist/index.js",
-  "types": "dist/types.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "update-test-harness": "tsc && cp -R dist/ test-harness/src/SpeechlySpeechRecognition",
