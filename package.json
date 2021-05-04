@@ -1,6 +1,6 @@
 {
   "name": "speech-recognition-polyfill",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Polyfill for the Speech Recognition API using Speechly",
   "main": "dist/index.js",
   "types": "dist/types.d.ts",
@@ -12,7 +12,8 @@
     "test": "jest --config ./jest.config.js",
     "test:watch": "jest --watch --config ./jest.config.js",
     "docs": "typedoc --readme none --gitRevision HEAD src/index.ts",
-    "api-extractor": "tsc && api-extractor run --local --verbose"
+    "api-extractor": "tsc && api-extractor run --local --verbose",
+    "prepublishOnly": "tsc && api-extractor run --verbose"
   },
   "watch": {
     "update-test-harness": {
