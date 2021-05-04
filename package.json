@@ -1,6 +1,6 @@
 {
   "name": "speech-recognition-polyfill",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Polyfill for the Speech Recognition API using Speechly",
   "main": "dist/index.js",
   "types": "dist/types.d.ts",
@@ -23,6 +23,9 @@
       "extensions": "ts"
     }
   },
+  "files": [
+    "dist"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
