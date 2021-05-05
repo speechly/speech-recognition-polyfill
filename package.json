@@ -6,6 +6,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "set-app-id": "echo \"REACT_APP_APP_ID=${APP_ID}\" > test-harness/.env.local",
     "update-test-harness": "tsc && cp -R dist/ test-harness/src/SpeechlySpeechRecognition",
     "run-test-harness": "cd test-harness && npm i && npm start",
     "dev": "npm-watch update-test-harness & npm run update-test-harness && npm run run-test-harness",
