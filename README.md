@@ -208,3 +208,19 @@ export default () => {
   );
 };
 ```
+
+# Limitations
+
+While this polyfill is intended to enable most use cases for voice-driven web apps, it does not implement the full [W3C specification](https://wicg.github.io/speech-api/#speechreco-section) for `SpeechRecognition`, only a subset:
+* `start()` method
+* `stop()` method
+* `abort()` method
+* `continuous` property
+* `interimResults` property
+* `onresult` property
+* `onend` property - a callback that is fired when `stop()` or `abort()` is called
+
+Some notable limitations:
+* The `lang` property is currently unsupported, defaulting to English transcription
+* `onresult` will only receive the most recent speech recognition result (the utterance that the user is in the process of saying or has just finished saying) and does not store a history of all transcripts. This can easily be resolved by either managing your own transcript state (see the [Displaying a transcript](#displaying-a-transcript) example above) or using `react-speech-recognition` to do that for you
+* Transcripts are generated in uppercase letters without punctuation. If needed, you can transform them using [toLowerCase()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase)
