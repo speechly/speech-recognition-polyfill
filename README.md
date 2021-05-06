@@ -4,6 +4,14 @@ Polyfill for the [SpeechRecognition](https://wicg.github.io/speech-api/#speechre
 
 Speechly offers a free tier for its speech recognition API with a generous usage limit.
 
+# Useful links
+
+* [Quickstart](#quickstart)
+* [Examples](#examples)
+* [Integrating with react-speech-recognition](#integrating-with-react-speech-recognition)
+* [Limitations](#limitations)
+* [Type docs](docs/README.md)
+
 # Quickstart
 
 ## Installation
