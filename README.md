@@ -2,6 +2,8 @@
 
 Polyfill for the [SpeechRecognition](https://wicg.github.io/speech-api/#speechreco-section) standard on web, using [Speechly](https://www.speechly.com/) as the underlying API. The primary use of this library is to enable speech recognition on browsers that would not normally support it natively.
 
+Speechly offers a free tier for its speech recognition API with a generous usage limit.
+
 # Quickstart
 
 ## Installation
@@ -12,7 +14,7 @@ npm install --save speech-recognition-polyfill
 
 ## Basic usage
 
-First, you need a Speechly app ID. Speechly offers a free tier with a generous usage limit. You can find guidance on how to create a Speechly application and obtain an app ID [here](https://docs.speechly.com/quick-start/).
+First, you need a Speechly app ID. To get this, you can follow [this guide](https://docs.speechly.com/quick-start/). Note that you can leave the configuration empty - for now, you just need to deploy a Speechly application and copy the app ID from your Speechly dashboard.
 
 Once you have an app ID, you can use it to create a recognition object that can start transcribing anything the user speaks into the microphone:
 
