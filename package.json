@@ -14,7 +14,8 @@
     "test:watch": "jest --watch --config ./jest.config.js",
     "docs": "typedoc --readme none --gitRevision HEAD src/index.ts",
     "api-extractor": "tsc && api-extractor run --local --verbose",
-    "prepublishOnly": "tsc && api-extractor run --verbose"
+    "prepublishOnly": "tsc && api-extractor run --verbose",
+    "prepare": "husky install"
   },
   "watch": {
     "update-test-harness": {
