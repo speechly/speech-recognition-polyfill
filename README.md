@@ -11,6 +11,7 @@ Speechly offers a free tier for its speech recognition API with a generous usage
 * [Integrating with react-speech-recognition](#integrating-with-react-speech-recognition)
 * [Limitations](#limitations)
 * [Type docs](docs/README.md)
+* [About Speechly](#about-speechly)
 
 # Quickstart
 
@@ -234,3 +235,20 @@ Some notable limitations:
 * The `lang` property is currently unsupported, defaulting to English transcription
 * `onresult` will only receive the most recent speech recognition result (the utterance that the user is in the process of saying or has just finished saying) and does not store a history of all transcripts. This can easily be resolved by either managing your own transcript state (see the [Displaying a transcript](#displaying-a-transcript) example above) or using `react-speech-recognition` to do that for you
 * Transcripts are generated in uppercase letters without punctuation. If needed, you can transform them using [toLowerCase()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase)
+
+# About Speechly
+
+Speechly is a developer tool for building real-time multimodal voice user interfaces. It enables developers and designers to enhance their current touch user interface with voice functionalities for better user experience. Speechly key features:
+
+## Speechly key features
+
+- Fully streaming API
+- Multi modal from the ground up
+- Easy to configure for any use case
+- Fast to integrate to any touch screen application
+- Supports natural corrections such as "Show me red – i mean blue t-shirts"
+- Real time visual feedback encourages users to go on with their voice
+
+|                  Example application                  | Description                                                                                                                                                                                                                                                                                                                               |
+| :---------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src="https://i.imgur.com/v9o1JHf.gif" width=50%> | Instead of using buttons, input fields and dropdowns, Speechly enables users to interact with the application by using voice. <br />User gets real-time visual feedback on the form as they speak and are encouraged to go on. If there's an error, the user can either correct it by using traditional touch user interface or by voice. |
