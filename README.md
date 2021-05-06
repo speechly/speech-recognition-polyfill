@@ -11,6 +11,7 @@ Speechly offers a free tier for its speech recognition API with a generous usage
 * [Integrating with react-speech-recognition](#integrating-with-react-speech-recognition)
 * [Limitations](#limitations)
 * [Type docs](docs/README.md)
+* [Contributing](#contributing)
 * [About Speechly](#about-speechly)
 
 # Quickstart
@@ -235,6 +236,10 @@ Some notable limitations:
 * The `lang` property is currently unsupported, defaulting to English transcription
 * `onresult` will only receive the most recent speech recognition result (the utterance that the user is in the process of saying or has just finished saying) and does not store a history of all transcripts. This can easily be resolved by either managing your own transcript state (see the [Displaying a transcript](#displaying-a-transcript) example above) or using `react-speech-recognition` to do that for you
 * Transcripts are generated in uppercase letters without punctuation. If needed, you can transform them using [toLowerCase()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase)
+
+# Contributing
+
+For a guide on how to develop `speech-recognition-polyfill` and contribute changes, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 # About Speechly
 
