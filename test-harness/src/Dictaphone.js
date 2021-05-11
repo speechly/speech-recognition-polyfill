@@ -47,7 +47,6 @@ export default () => {
       <button onClick={listenOnce}>Listen once</button>
       <button onClick={listenContinuously}>Listen continuously</button>
       <button onClick={SpeechRecognition.stopListening}>Stop</button>
-      <button onClick={SpeechRecognition.abortListening}>Abort</button>
     </div>
   )
 }
