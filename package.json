@@ -47,7 +47,14 @@
   "files": [
     "dist"
   ],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/speechly/speech-recognition-polyfill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/speechly/speech-recognition-polyfill/issues"
+  },
+  "author": "Speechly",
   "license": "MIT",
   "devDependencies": {
     "@microsoft/api-extractor": "^7.15.0",
