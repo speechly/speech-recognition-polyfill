@@ -1,6 +1,6 @@
-speech-recognition-polyfill
+@speechly/speech-recognition-polyfill
 
-# speech-recognition-polyfill
+# @speechly/speech-recognition-polyfill
 
 A polyfill (a "[ponyfill](https://ponyfoo.com/articles/polyfills-or-ponyfills)" to be more precise) for the
 [SpeechRecognition API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition) that uses

@@ -1,4 +1,4 @@
-[speech-recognition-polyfill](../README.md) / SpeechRecognitionResult
+[@speechly/speech-recognition-polyfill](../README.md) / SpeechRecognitionResult
 
 # Interface: SpeechRecognitionResult
 

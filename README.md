@@ -28,7 +28,7 @@ Speechly offers a free tier for its speech recognition API with a generous usage
 ## Installation
 
 ```
-npm install --save speech-recognition-polyfill
+npm install --save @speechly/speech-recognition-polyfill
 ```
 
 ## Basic usage
@@ -38,7 +38,7 @@ First, you need a Speechly app ID. To get this, you can follow [this guide](http
 Once you have an app ID, you can use it to create a recognition object that can start transcribing anything the user speaks into the microphone:
 
 ```
-import { createSpeechlySpeechRecognition } from 'speech-recognition-polyfill';
+import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 
 const APP_ID = '<your_speechly-app-id>';
 const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(APP_ID);
@@ -91,7 +91,7 @@ A common use case is to enable the user to control a web app using their voice. 
 
 ```
 import React, { useState, useEffect } from 'react';
-import { createSpeechlySpeechRecognition } from 'speech-recognition-polyfill';
+import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 
 const appId = '<your_speechly-app-id>';
 const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId);
@@ -137,7 +137,7 @@ You may want to simply display everything the user says as text, for composing a
 
 ```
 import React, { useState, useEffect, useCallback } from 'react';
-import { createSpeechlySpeechRecognition } from 'speech-recognition-polyfill';
+import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 
 const appId = '<your_speechly-app-id>';
 const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId);
@@ -183,7 +183,7 @@ Below is an example with more complex commands, which print a message in respons
 ```
 import React, { useState } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { createSpeechlySpeechRecognition } from 'speech-recognition-polyfill';
+import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 
 const appId = '<your_speechly-app-id>';
 const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId);
