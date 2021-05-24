@@ -40,8 +40,8 @@ Once you have an app ID, you can use it to create a recognition object that can 
 ```
 import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 
-const APP_ID = '<your_speechly-app-id>';
-const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(APP_ID);
+const appId = '<your_speechly_app_id>';
+const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId);
 const speechRecognition = new SpeechlySpeechRecognition();
 ```
 
@@ -93,7 +93,7 @@ A common use case is to enable the user to control a web app using their voice. 
 import React, { useState, useEffect } from 'react';
 import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 
-const appId = '<your_speechly-app-id>';
+const appId = '<your_speechly_app_id>';
 const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId);
 const speechRecognition = new SpeechlySpeechRecognition();
 speechRecognition.continuous = true;
@@ -102,7 +102,7 @@ speechRecognition.interimResults = true;
 const COMMANDS = ['PLAY', 'PAUSE', 'REWIND'];
 
 export default () => {
-  const [ matchedCommand, setMatchedCommand] = useState('');
+  const [matchedCommand, setMatchedCommand] = useState('');
 
   const handleResult = ({ results }) => {
     const { transcript } = results[0][0];
@@ -119,12 +119,12 @@ export default () => {
 
   return (
     <div>
-      <div
+      <button
         onTouchStart={speechRecognition.start}
         onMouseDown={speechRecognition.start}
         onTouchEnd={speechRecognition.stop}
         onMouseUp={speechRecognition.stop}
-        >Hold to talk</div>
+        >Hold to talk</button>
       <span>{matchedCommand}</span>
     </div>
   );
@@ -139,13 +139,13 @@ You may want to simply display everything the user says as text, for composing a
 import React, { useState, useEffect, useCallback } from 'react';
 import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 
-const appId = '<your_speechly-app-id>';
+const appId = '<your_speechly_app_id>';
 const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId);
 const speechRecognition = new SpeechlySpeechRecognition();
 speechRecognition.continuous = true;
 
 export default () => {
-  const [ transcript, setTranscript] = useState('');
+  const [transcript, setTranscript] = useState('');
 
   const handleResult = useCallback(({ results }) => {
     const newTranscript = [transcript, results[0][0].transcript].join(' ');
@@ -158,12 +158,12 @@ export default () => {
 
   return (
     <div>
-      <div
+      <button
         onTouchStart={speechRecognition.start}
         onMouseDown={speechRecognition.start}
         onTouchEnd={speechRecognition.stop}
         onMouseUp={speechRecognition.stop}
-        >Hold to talk</div>
+        >Hold to talk</button>
       <span>{transcript}</span>
     </div>
   );
@@ -185,7 +185,7 @@ import React, { useState } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';
 
-const appId = '<your_speechly-app-id>';
+const appId = '<your_speechly_app_id>';
 const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId);
 SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition);
 
@@ -217,12 +217,12 @@ export default () => {
   return (
     <div>
       <p>Microphone: {listening ? 'on' : 'off'}</p>
-      <div
+      <button
         onTouchStart={listenContinuously}
         onMouseDown={listenContinuously}
         onTouchEnd={SpeechRecognition.stopListening}
         onMouseUp={SpeechRecognition.stopListening}
-      >Hold to talk</div>
+      >Hold to talk</button>
       <p>{transcript}</p>
       <p>{message}</p>
     </div>
