@@ -33,7 +33,7 @@ npm install --save @speechly/speech-recognition-polyfill
 
 ## Basic usage
 
-First, you need a Speechly app ID. To get this, you can follow [this guide](https://docs.speechly.com/quick-start/). Note that you can leave the configuration empty - for now, you just need to deploy a Speechly application and copy the app ID from your Speechly dashboard.
+First, you need a Speechly app ID. To get this, you can follow [this guide](https://docs.speechly.com/quick-start/stt-only/).
 
 Once you have an app ID, you can use it to create a recognition object that can start transcribing anything the user speaks into the microphone:
 
