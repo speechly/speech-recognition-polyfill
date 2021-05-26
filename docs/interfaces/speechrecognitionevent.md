@@ -4,8 +4,6 @@
 
 Data associated with an update to the transcript for the ongoing utterance
 
-**`alpha`** 
-
 ## Table of contents
 
 ### Properties

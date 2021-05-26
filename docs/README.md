@@ -37,8 +37,6 @@ is incomplete, but should enable the majority of use cases
 
 Callback that is invoked when transcription ends
 
-**`alpha`** 
-
 #### Type declaration:
 
 ▸ (): *void*
@@ -54,8 +52,6 @@ ___
 Ƭ **SpeechRecognitionClass**: () => [*SpeechRecognition*](interfaces/speechrecognition.md)
 
 Class that implements the SpeechRecognition interface
-
-**`alpha`** 
 
 #### Type declaration:
 
@@ -74,8 +70,6 @@ ___
 Callback that is invoked whenever the transcript gets updated
 
 **`param`** Event containing updates to the transcript
-
-**`alpha`** 
 
 #### Type declaration:
 
@@ -99,8 +93,6 @@ Defined in: [types.ts:58](https://github.com/JamesBrill/speech-recognition-polyf
 
 Returns a SpeechRecognition implementation that uses a given Speechly app ID
 to generate transcriptions using the Speechly API
-
-**`alpha`** 
 
 #### Parameters:
 

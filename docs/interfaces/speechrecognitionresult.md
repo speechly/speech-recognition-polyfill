@@ -4,8 +4,6 @@
 
 Object containing a transcript for the ongoing utterance and an indicator of whether that transcript is final or not
 
-**`alpha`** 
-
 ## Table of contents
 
 ### Properties

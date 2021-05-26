@@ -4,8 +4,6 @@
 
 Transcript for the ongoing utterance, including the level of confidence in that transcript
 
-**`alpha`** 
-
 ## Table of contents
 
 ### Properties

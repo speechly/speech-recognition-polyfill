@@ -4,13 +4,13 @@
 
 ```ts
 
-// @alpha
+// @public
 export const createSpeechlySpeechRecognition: (appId: string) => SpeechRecognitionClass;
 
-// @alpha
+// @public
 export type SpeechEndCallback = () => void;
 
-// @alpha
+// @public
 interface SpeechRecognition_2 {
     abort: () => Promise<void>;
     continuous: boolean;
@@ -23,7 +23,7 @@ interface SpeechRecognition_2 {
 
 export { SpeechRecognition_2 as SpeechRecognition }
 
-// @alpha
+// @public
 interface SpeechRecognitionAlternative_2 {
     confidence: number;
     transcript: string;
@@ -31,10 +31,10 @@ interface SpeechRecognitionAlternative_2 {
 
 export { SpeechRecognitionAlternative_2 as SpeechRecognitionAlternative }
 
-// @alpha
+// @public
 export type SpeechRecognitionClass = new () => SpeechRecognition_2;
 
-// @alpha
+// @public
 interface SpeechRecognitionEvent_2 {
     resultIndex: number;
     results: SpeechRecognitionResult_2[];
@@ -42,10 +42,10 @@ interface SpeechRecognitionEvent_2 {
 
 export { SpeechRecognitionEvent_2 as SpeechRecognitionEvent }
 
-// @alpha
+// @public
 export type SpeechRecognitionEventCallback = (speechRecognitionEvent: SpeechRecognitionEvent_2) => void;
 
-// @alpha
+// @public
 interface SpeechRecognitionResult_2 {
     0: SpeechRecognitionAlternative_2;
     isFinal: boolean;

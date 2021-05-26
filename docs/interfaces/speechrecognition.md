@@ -5,8 +5,6 @@
 Subset of the [W3C SpeechRecognition spec](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition) that
 can be used for basic transcription
 
-**`alpha`** 
-
 ## Table of contents
 
 ### Properties
