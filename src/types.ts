@@ -1,6 +1,6 @@
 /**
  * Transcript for the ongoing utterance, including the level of confidence in that transcript
- * @alpha
+ * @public
  */
 export interface SpeechRecognitionAlternative {
   /**
@@ -15,7 +15,7 @@ export interface SpeechRecognitionAlternative {
 
 /**
  * Object containing a transcript for the ongoing utterance and an indicator of whether that transcript is final or not
- * @alpha
+ * @public
  */
 export interface SpeechRecognitionResult {
   /**
@@ -34,7 +34,7 @@ export interface SpeechRecognitionResult {
 
 /**
  * Data associated with an update to the transcript for the ongoing utterance
- * @alpha
+ * @public
  */
 export interface SpeechRecognitionEvent {
   /**
@@ -53,20 +53,20 @@ export interface SpeechRecognitionEvent {
 /**
  * Callback that is invoked whenever the transcript gets updated
  * @param speechRecognitionEvent - Event containing updates to the transcript
- * @alpha
+ * @public
  */
 export type SpeechRecognitionEventCallback = (speechRecognitionEvent: SpeechRecognitionEvent) => void
 
 /**
  * Callback that is invoked when transcription ends
- * @alpha
+ * @public
  */
 export type SpeechEndCallback = () => void
 
 /**
  * Subset of the {@link https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition | W3C SpeechRecognition spec} that
  * can be used for basic transcription
- * @alpha
+ * @public
  */
 export interface SpeechRecognition {
   /**
@@ -103,6 +103,6 @@ export interface SpeechRecognition {
 
 /**
  * Class that implements the SpeechRecognition interface
- * @alpha
+ * @public
  */
 export type SpeechRecognitionClass = new () => SpeechRecognition

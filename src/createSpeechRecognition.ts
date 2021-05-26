@@ -13,7 +13,7 @@ import {
  *
  * @param appId - Speechly app ID
  * @returns Class that implements the SpeechRecognition interface
- * @alpha
+ * @public
  */
 export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitionClass => {
   return class SpeechlySpeechRecognition implements SpeechRecognition {
