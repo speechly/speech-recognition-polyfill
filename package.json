@@ -1,6 +1,6 @@
 {
   "name": "@speechly/speech-recognition-polyfill",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Polyfill for the Speech Recognition API using Speechly",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -81,5 +81,8 @@
   },
   "dependencies": {
     "@speechly/browser-client": "^1.0.11"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
