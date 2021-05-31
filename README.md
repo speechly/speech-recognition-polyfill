@@ -16,6 +16,7 @@ Speechly offers a free tier for its speech recognition API with a generous usage
 # Useful links
 
 * [Quickstart](#quickstart)
+* [Browser support](#browser-support)
 * [Examples](#examples)
 * [Integrating with react-speech-recognition](#integrating-with-react-speech-recognition)
 * [Limitations](#limitations)
@@ -80,6 +81,16 @@ After calling `start()`, the microphone will be turned on and the recognition ob
 ```
 speechRecognition.stop();
 ```
+
+# Browser support
+
+This polyfill is supported on all browsers except for Internet Explorer and very old versions of other browsers. On these browsers, an error will be thrown when creating a `SpeechlySpeechRecognition` object. If you want to detect browser support for the APIs used by this library, check for the following:
+* `window.navigator.mediaDevices` is defined
+* `window.AudioContext` or `window.webkitAudioContext` is defined
+
+If both of these conditions are true, then you can enable your voice-enabled feature. Otherwise, you will need to display some fallback UI.
+
+We will be adding a browser support check in an upcoming version to handle this logic for you.
 
 # Examples
 
