@@ -16,7 +16,14 @@ import {
  * @public
  */
 export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitionClass => {
+  const browserSupportsAudioApis: boolean =
+    typeof window !== 'undefined' &&
+    window.navigator?.mediaDevices !== undefined &&
+    (window.AudioContext !== undefined || window.webkitAudioContext !== undefined)
+
   return class SpeechlySpeechRecognition implements SpeechRecognition {
+    static readonly hasBrowserSupport: boolean = browserSupportsAudioApis
+
     private readonly client: Client
     private clientInitialised = false
     private aborted = false
