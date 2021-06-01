@@ -109,7 +109,7 @@ export interface SpeechRecognitionClass {
   /**
    * Does the browser support the APIs needed for this polyfill?
    */
-  hasBrowserSupport: boolean
+  readonly hasBrowserSupport: boolean
   /**
    * Constructor for a SpeechRecognition implementation
    */
