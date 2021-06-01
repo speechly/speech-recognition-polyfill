@@ -32,7 +32,10 @@ interface SpeechRecognitionAlternative_2 {
 export { SpeechRecognitionAlternative_2 as SpeechRecognitionAlternative }
 
 // @public
-export type SpeechRecognitionClass = new () => SpeechRecognition_2;
+export interface SpeechRecognitionClass {
+    new (): SpeechRecognition_2;
+    readonly hasBrowserSupport: boolean;
+}
 
 // @public
 interface SpeechRecognitionEvent_2 {

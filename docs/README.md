@@ -16,13 +16,13 @@ is incomplete, but should enable the majority of use cases
 
 - [SpeechRecognition](interfaces/speechrecognition.md)
 - [SpeechRecognitionAlternative](interfaces/speechrecognitionalternative.md)
+- [SpeechRecognitionClass](interfaces/speechrecognitionclass.md)
 - [SpeechRecognitionEvent](interfaces/speechrecognitionevent.md)
 - [SpeechRecognitionResult](interfaces/speechrecognitionresult.md)
 
 ### Type aliases
 
 - [SpeechEndCallback](README.md#speechendcallback)
-- [SpeechRecognitionClass](README.md#speechrecognitionclass)
 - [SpeechRecognitionEventCallback](README.md#speechrecognitioneventcallback)
 
 ### Functions
@@ -44,22 +44,6 @@ Callback that is invoked when transcription ends
 **Returns:** *void*
 
 Defined in: [types.ts:64](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L64)
-
-___
-
-### SpeechRecognitionClass
-
-Ƭ **SpeechRecognitionClass**: () => [*SpeechRecognition*](interfaces/speechrecognition.md)
-
-Class that implements the SpeechRecognition interface
-
-#### Type declaration:
-
-\+ (): [*SpeechRecognition*](interfaces/speechrecognition.md)
-
-**Returns:** [*SpeechRecognition*](interfaces/speechrecognition.md)
-
-Defined in: [types.ts:108](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L108)
 
 ___
 
@@ -89,7 +73,7 @@ Defined in: [types.ts:58](https://github.com/JamesBrill/speech-recognition-polyf
 
 ### createSpeechlySpeechRecognition
 
-▸ `Const`**createSpeechlySpeechRecognition**(`appId`: *string*): [*SpeechRecognitionClass*](README.md#speechrecognitionclass)
+▸ `Const`**createSpeechlySpeechRecognition**(`appId`: *string*): [*SpeechRecognitionClass*](interfaces/speechrecognitionclass.md)
 
 Returns a SpeechRecognition implementation that uses a given Speechly app ID
 to generate transcriptions using the Speechly API
@@ -100,7 +84,7 @@ to generate transcriptions using the Speechly API
 | :------ | :------ | :------ |
 | `appId` | *string* | Speechly app ID |
 
-**Returns:** [*SpeechRecognitionClass*](README.md#speechrecognitionclass)
+**Returns:** [*SpeechRecognitionClass*](interfaces/speechrecognitionclass.md)
 
 Class that implements the SpeechRecognition interface
 
