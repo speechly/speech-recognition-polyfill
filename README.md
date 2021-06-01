@@ -84,13 +84,17 @@ speechRecognition.stop();
 
 # Browser support
 
-This polyfill is supported on all browsers except for Internet Explorer and very old versions of other browsers. On these browsers, an error will be thrown when creating a `SpeechlySpeechRecognition` object. If you want to detect browser support for the APIs used by this library, check for the following:
-* `window.navigator.mediaDevices` is defined
-* `window.AudioContext` or `window.webkitAudioContext` is defined
+This polyfill is supported on all browsers except for Internet Explorer and very old versions of other browsers. On these browsers, an error will be thrown when creating a `SpeechlySpeechRecognition` object.
 
-If both of these conditions are true, then you can enable your voice-enabled feature. Otherwise, you will need to display some fallback UI.
-
-We will be adding a browser support check in an upcoming version to handle this logic for you.
+The `SpeechlySpeechRecognition` class offers the `hasBrowserSupport` flag to check whether the browser supports the required APIs. We recommend you do the following when creating your speech recognition object:
+```
+if (SpeechlySpeechRecognition.hasBrowserSupport) {
+  const speechRecognition = new SpeechlySpeechRecognition();
+  // Use speech recognition
+} else {
+  // Show some fallback UI
+}
+```
 
 # Examples
 
