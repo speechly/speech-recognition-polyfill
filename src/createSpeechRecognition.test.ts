@@ -1,5 +1,13 @@
 import createSpeechlySpeechRecognition from './createSpeechRecognition';
 import {
+  mockUndefinedWindow,
+  mockUndefinedNavigator,
+  mockMediaDevices,
+  mockUndefinedMediaDevices,
+  mockAudioContext,
+  mockWebkitAudioContext,
+  mockUndefinedAudioContext,
+  mockUndefinedWebkitAudioContext,
   expectSentenceToBeTranscribedWithFinalResult,
   expectSentenceToBeTranscribedWithInterimAndFinalResults,
   expectSentenceToBeTranscribedWithFirstInitialResult,
@@ -291,5 +299,61 @@ describe('createSpeechlySpeechRecognition', () => {
 
     expect(mockOnResult).toHaveBeenCalledTimes(1);
     expectSentenceToBeTranscribedWithFirstInitialResult(SENTENCE_ONE, mockOnResult);
+  })
+
+  it('sets hasBrowserSupport to true when required APIs are defined (non-WebKit)', async () => {
+    mockAudioContext();
+    mockUndefinedWebkitAudioContext();
+    mockMediaDevices();
+
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+
+    expect(SpeechRecognition.hasBrowserSupport).toEqual(true);
+  })
+
+  it('sets hasBrowserSupport to true when required APIs are defined (WebKit)', async () => {
+    mockUndefinedAudioContext();
+    mockWebkitAudioContext();
+    mockMediaDevices();
+
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+
+    expect(SpeechRecognition.hasBrowserSupport).toEqual(true);
+  })
+
+  it('sets hasBrowserSupport to false when all AudioContext APIs are undefined', async () => {
+    mockUndefinedAudioContext();
+    mockUndefinedWebkitAudioContext();
+    mockMediaDevices();
+
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+
+    expect(SpeechRecognition.hasBrowserSupport).toEqual(false);
+  })
+
+  it('sets hasBrowserSupport to false when MediaDevices API is undefined', async () => {
+    mockAudioContext();
+    mockUndefinedMediaDevices();
+
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+
+    expect(SpeechRecognition.hasBrowserSupport).toEqual(false);
+  })
+
+  it('sets hasBrowserSupport to false when Navigator API is undefined', async () => {
+    mockAudioContext();
+    mockUndefinedNavigator();
+
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+
+    expect(SpeechRecognition.hasBrowserSupport).toEqual(false);
+  })
+
+  it('sets hasBrowserSupport to false when window is undefined', async () => {
+    mockUndefinedWindow();
+
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+
+    expect(SpeechRecognition.hasBrowserSupport).toEqual(false);
   })
 })

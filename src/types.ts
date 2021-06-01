@@ -105,4 +105,13 @@ export interface SpeechRecognition {
  * Class that implements the SpeechRecognition interface
  * @public
  */
-export type SpeechRecognitionClass = new () => SpeechRecognition
+export interface SpeechRecognitionClass {
+  /**
+   * Does the browser support the APIs needed for this polyfill?
+   */
+  readonly hasBrowserSupport: boolean
+  /**
+   * Constructor for a SpeechRecognition implementation
+   */
+  new (): SpeechRecognition
+}

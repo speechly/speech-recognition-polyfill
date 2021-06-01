@@ -1,6 +1,39 @@
+// @ts-nocheck
 import TEST_DATA from './testData';
 
 const { SENTENCE_ONE } = TEST_DATA;
+
+export const mockUndefinedWindow = () => {
+  delete global.window;
+}
+
+export const mockUndefinedNavigator = () => {
+  global.navigator = undefined;
+}
+
+export const mockMediaDevices = () => {
+  global.navigator.mediaDevices = jest.fn();
+}
+
+export const mockUndefinedMediaDevices = () => {
+  global.navigator.mediaDevices = undefined;
+}
+
+export const mockAudioContext = () => {
+  global.AudioContext = jest.fn();
+}
+
+export const mockWebkitAudioContext = () => {
+  global.webkitAudioContext = jest.fn();
+}
+
+export const mockUndefinedAudioContext = () => {
+  global.AudioContext = undefined;
+}
+
+export const mockUndefinedWebkitAudioContext = () => {
+  global.webkitAudioContext = undefined;
+}
 
 export const expectSentenceToBeTranscribedWithFirstInitialResult = (sentence: any, mockOnResult: any) => {
   expect(mockOnResult).toHaveBeenNthCalledWith(1, { results: [
