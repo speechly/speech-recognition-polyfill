@@ -17,6 +17,7 @@ Speechly offers a free tier for its speech recognition API with a generous usage
 
 * [Quickstart](#quickstart)
 * [Browser support](#browser-support)
+* [Handling errors](#handling-errors)
 * [Examples](#examples)
 * [Integrating with react-speech-recognition](#integrating-with-react-speech-recognition)
 * [Limitations](#limitations)
@@ -94,6 +95,24 @@ if (SpeechlySpeechRecognition.hasBrowserSupport) {
 } else {
   // Show some fallback UI
 }
+```
+
+# Handling errors
+
+A common error case is when the user chooses not to give permission for the web app to access the microphone. This, and any other error emitted by this polyfill, can be handled via the `onerror` callback. In such cases, it's advised that you render some fallback UI as these errors will usually mean that voice-driven features will not work and should be disabled:
+
+```
+import { MicrophoneNotAllowedError } from '@speechly/speech-recognition-polyfill';
+
+...
+
+speechRecognition.onerror = (event) => {
+  if (event === MicrophoneNotAllowedError) {
+    // Microphone permission denied - show some fallback UI
+  } else {
+    // Unable to start transcribing - show some fallback UI
+  }
+};
 ```
 
 # Examples
@@ -226,8 +245,21 @@ export default () => {
       callback: () => setMessage('My pleasure')
     }
   ];
-  const { transcript, listening } = useSpeechRecognition({ commands });
+  const {
+    transcript,
+    listening,
+    browserSupportsSpeechRecognition,
+    isMicrophoneAvailable
+  } = useSpeechRecognition({ commands });
   const listenContinuously = () => SpeechRecognition.startListening({ continuous: true });
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>No browser support</span>
+  }
+
+  if (!isMicrophoneAvailable) {
+    return <span>Please allow access to the microphone</span>
+  }
 
   return (
     <div>
@@ -255,11 +287,13 @@ While this polyfill is intended to enable most use cases for voice-driven web ap
 * `interimResults` property
 * `onresult` property
 * `onend` property - a callback that is fired when `stop()` or `abort()` is called
+* `onerror` property - a callback that is fired when an error occurs when attempting to start speech recognition
 
 Some notable limitations:
 * The `lang` property is currently unsupported, defaulting to English transcription
 * `onresult` will only receive the most recent speech recognition result (the utterance that the user is in the process of saying or has just finished saying) and does not store a history of all transcripts. This can easily be resolved by either managing your own transcript state (see the [Displaying a transcript](#displaying-a-transcript) example above) or using `react-speech-recognition` to do that for you
 * Transcripts are generated in uppercase letters without punctuation. If needed, you can transform them using [toLowerCase()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase)
+* `onerror` currently only supports the `not-allowed` (user denied permission to use the microphone) error and the `audio-capture` error, which is emitted for any other case where speech recognition fails. The full list in the spec can be found [here](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognitionErrorEvent/error)
 
 # Contributing
 

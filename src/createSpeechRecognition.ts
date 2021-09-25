@@ -116,5 +116,4 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
   }
 }
 
-export { MicrophoneNotAllowedError, SpeechRecognitionFailedError }
 export default createSpeechlySpeechRecognition
