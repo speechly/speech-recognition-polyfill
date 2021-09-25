@@ -24,7 +24,7 @@ Constructor for a SpeechRecognition implementation
 
 **Returns:** [*SpeechRecognition*](speechrecognition.md)
 
-Defined in: [types.ts:112](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L112)
+Defined in: [types.ts:156](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L156)
 
 ## Properties
 
@@ -34,4 +34,4 @@ Defined in: [types.ts:112](https://github.com/JamesBrill/speech-recognition-poly
 
 Does the browser support the APIs needed for this polyfill?
 
-Defined in: [types.ts:112](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L112)
+Defined in: [types.ts:156](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L156)

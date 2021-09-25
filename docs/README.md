@@ -17,13 +17,20 @@ is incomplete, but should enable the majority of use cases
 - [SpeechRecognition](interfaces/speechrecognition.md)
 - [SpeechRecognitionAlternative](interfaces/speechrecognitionalternative.md)
 - [SpeechRecognitionClass](interfaces/speechrecognitionclass.md)
+- [SpeechRecognitionErrorEvent](interfaces/speechrecognitionerrorevent.md)
 - [SpeechRecognitionEvent](interfaces/speechrecognitionevent.md)
 - [SpeechRecognitionResult](interfaces/speechrecognitionresult.md)
 
 ### Type aliases
 
 - [SpeechEndCallback](README.md#speechendcallback)
+- [SpeechErrorCallback](README.md#speecherrorcallback)
 - [SpeechRecognitionEventCallback](README.md#speechrecognitioneventcallback)
+
+### Variables
+
+- [MicrophoneNotAllowedError](README.md#microphonenotallowederror)
+- [SpeechRecognitionFailedError](README.md#speechrecognitionfailederror)
 
 ### Functions
 
@@ -43,7 +50,29 @@ Callback that is invoked when transcription ends
 
 **Returns:** *void*
 
-Defined in: [types.ts:64](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L64)
+Defined in: [types.ts:97](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L97)
+
+___
+
+### SpeechErrorCallback
+
+Ƭ **SpeechErrorCallback**: (`speechRecognitionErrorEvent`: [*SpeechRecognitionErrorEvent*](interfaces/speechrecognitionerrorevent.md)) => *void*
+
+Callback that is invoked when an error occurs
+
+#### Type declaration:
+
+▸ (`speechRecognitionErrorEvent`: [*SpeechRecognitionErrorEvent*](interfaces/speechrecognitionerrorevent.md)): *void*
+
+#### Parameters:
+
+| Name | Type |
+| :------ | :------ |
+| `speechRecognitionErrorEvent` | [*SpeechRecognitionErrorEvent*](interfaces/speechrecognitionerrorevent.md) |
+
+**Returns:** *void*
+
+Defined in: [types.ts:103](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L103)
 
 ___
 
@@ -67,7 +96,27 @@ Callback that is invoked whenever the transcript gets updated
 
 **Returns:** *void*
 
-Defined in: [types.ts:58](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L58)
+Defined in: [types.ts:91](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L91)
+
+## Variables
+
+### MicrophoneNotAllowedError
+
+• `Const` **MicrophoneNotAllowedError**: [*SpeechRecognitionErrorEvent*](interfaces/speechrecognitionerrorevent.md)
+
+Error emitted when the user does not give permission to use the microphone
+
+Defined in: [types.ts:72](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L72)
+
+___
+
+### SpeechRecognitionFailedError
+
+• `Const` **SpeechRecognitionFailedError**: [*SpeechRecognitionErrorEvent*](interfaces/speechrecognitionerrorevent.md)
+
+Generic error when speech recognition fails due to an unknown cause
+
+Defined in: [types.ts:81](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L81)
 
 ## Functions
 
@@ -88,4 +137,4 @@ to generate transcriptions using the Speechly API
 
 Class that implements the SpeechRecognition interface
 
-Defined in: [createSpeechRecognition.ts:18](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/createSpeechRecognition.ts#L18)
+Defined in: [createSpeechRecognition.ts:21](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/createSpeechRecognition.ts#L21)

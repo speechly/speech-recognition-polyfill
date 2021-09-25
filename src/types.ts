@@ -67,6 +67,7 @@ export interface SpeechRecognitionErrorEvent {
 
 /**
  * Error emitted when the user does not give permission to use the microphone
+ * @public
  */
 export const MicrophoneNotAllowedError: SpeechRecognitionErrorEvent = {
   error: 'not-allowed',
@@ -75,6 +76,7 @@ export const MicrophoneNotAllowedError: SpeechRecognitionErrorEvent = {
 
 /**
  * Generic error when speech recognition fails due to an unknown cause
+ * @public
  */
 export const SpeechRecognitionFailedError: SpeechRecognitionErrorEvent = {
   error: 'audio-capture',
