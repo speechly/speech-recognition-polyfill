@@ -10,7 +10,8 @@ export default () => {
     finalTranscript,
     resetTranscript,
     listening,
-    browserSupportsSpeechRecognition
+    browserSupportsSpeechRecognition,
+    isMicrophoneAvailable,
   } = useSpeechRecognition()
   useEffect(() => {
     if (interimTranscript !== '') {
@@ -28,6 +29,10 @@ export default () => {
 
   if (!browserSupportsSpeechRecognition) {
     return <span>No browser support</span>
+  }
+
+  if (!isMicrophoneAvailable) {
+    return <span>Please allow access to the microphone</span>
   }
 
   return (

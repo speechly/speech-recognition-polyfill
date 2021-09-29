@@ -1,10 +1,13 @@
-import { Client, Segment } from '@speechly/browser-client'
+import { Client, ErrNoAudioConsent, Segment } from '@speechly/browser-client'
 import {
   SpeechRecognitionEventCallback,
   SpeechEndCallback,
+  SpeechErrorCallback,
   SpeechRecognitionResult,
   SpeechRecognitionClass,
   SpeechRecognition,
+  MicrophoneNotAllowedError,
+  SpeechRecognitionFailedError,
 } from './types'
 
 /**
@@ -33,6 +36,7 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
     interimResults = false
     onresult: SpeechRecognitionEventCallback = () => {}
     onend: SpeechEndCallback = () => {}
+    onerror: SpeechErrorCallback = () => {}
 
     constructor() {
       this.client = new Client({ appId })
@@ -40,10 +44,18 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
     }
 
     public start = async (): Promise<void> => {
-      this.aborted = false
-      await this.initialise()
-      await this.client.startContext()
-      this.transcribing = true
+      try {
+        this.aborted = false
+        await this.initialise()
+        await this.client.startContext()
+        this.transcribing = true
+      } catch (e) {
+        if (e === ErrNoAudioConsent) {
+          this.onerror(MicrophoneNotAllowedError)
+        } else {
+          this.onerror(SpeechRecognitionFailedError)
+        }
+      }
     }
 
     public stop = async (): Promise<void> => {

@@ -8,7 +8,13 @@
 export const createSpeechlySpeechRecognition: (appId: string) => SpeechRecognitionClass;
 
 // @public
+export const MicrophoneNotAllowedError: SpeechRecognitionErrorEvent_2;
+
+// @public
 export type SpeechEndCallback = () => void;
+
+// @public
+export type SpeechErrorCallback = (speechRecognitionErrorEvent: SpeechRecognitionErrorEvent_2) => void;
 
 // @public
 interface SpeechRecognition_2 {
@@ -16,6 +22,7 @@ interface SpeechRecognition_2 {
     continuous: boolean;
     interimResults: boolean;
     onend: SpeechEndCallback;
+    onerror: SpeechErrorCallback;
     onresult: SpeechRecognitionEventCallback;
     start: () => Promise<void>;
     stop: () => Promise<void>;
@@ -38,6 +45,14 @@ export interface SpeechRecognitionClass {
 }
 
 // @public
+interface SpeechRecognitionErrorEvent_2 {
+    error: 'not-allowed' | 'audio-capture';
+    message: string;
+}
+
+export { SpeechRecognitionErrorEvent_2 as SpeechRecognitionErrorEvent }
+
+// @public
 interface SpeechRecognitionEvent_2 {
     resultIndex: number;
     results: SpeechRecognitionResult_2[];
@@ -47,6 +62,9 @@ export { SpeechRecognitionEvent_2 as SpeechRecognitionEvent }
 
 // @public
 export type SpeechRecognitionEventCallback = (speechRecognitionEvent: SpeechRecognitionEvent_2) => void;
+
+// @public
+export const SpeechRecognitionFailedError: SpeechRecognitionErrorEvent_2;
 
 // @public
 interface SpeechRecognitionResult_2 {

@@ -51,6 +51,39 @@ export interface SpeechRecognitionEvent {
 }
 
 /**
+ * Data associated with an error emitted from the recognition service
+ * @public
+ */
+export interface SpeechRecognitionErrorEvent {
+  /**
+   * Type of error raised
+   */
+  error: 'not-allowed' | 'audio-capture'
+  /**
+   * Message describing the error in more detail
+   */
+  message: string
+}
+
+/**
+ * Error emitted when the user does not give permission to use the microphone
+ * @public
+ */
+export const MicrophoneNotAllowedError: SpeechRecognitionErrorEvent = {
+  error: 'not-allowed',
+  message: 'User did not give permission to use the microphone',
+}
+
+/**
+ * Generic error when speech recognition fails due to an unknown cause
+ * @public
+ */
+export const SpeechRecognitionFailedError: SpeechRecognitionErrorEvent = {
+  error: 'audio-capture',
+  message: 'Speech recognition failed',
+}
+
+/**
  * Callback that is invoked whenever the transcript gets updated
  * @param speechRecognitionEvent - Event containing updates to the transcript
  * @public
@@ -62,6 +95,12 @@ export type SpeechRecognitionEventCallback = (speechRecognitionEvent: SpeechReco
  * @public
  */
 export type SpeechEndCallback = () => void
+
+/**
+ * Callback that is invoked when an error occurs
+ * @public
+ */
+export type SpeechErrorCallback = (speechRecognitionErrorEvent: SpeechRecognitionErrorEvent) => void
 
 /**
  * Subset of the {@link https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition | W3C SpeechRecognition spec} that
@@ -87,6 +126,11 @@ export interface SpeechRecognition {
    * @param speechRecognitionEvent - Event containing updates to the transcript
    */
   onend: SpeechEndCallback
+  /**
+   * Callback that is invoked when an error occurs
+   * @param speechRecognitionErrorEvent - Event containing details of the error
+   */
+  onerror: SpeechErrorCallback
   /**
    * Start transcribing utterances received from the microphone
    */

@@ -1,4 +1,6 @@
+import { ErrNoAudioConsent } from '@speechly/browser-client'
 import createSpeechlySpeechRecognition from './createSpeechRecognition';
+import { MicrophoneNotAllowedError, SpeechRecognitionFailedError } from './types';
 import {
   mockUndefinedWindow,
   mockUndefinedNavigator,
@@ -355,5 +357,31 @@ describe('createSpeechlySpeechRecognition', () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
 
     expect(SpeechRecognition.hasBrowserSupport).toEqual(false);
+  })
+
+  it('calls onerror with MicrophoneNotAllowedError error when no microphone permission given on start', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+    const mockOnError = jest.fn();
+    speechRecognition.onerror = mockOnError;
+    mockInitialize.mockImplementationOnce(() => Promise.reject(ErrNoAudioConsent))
+
+    await speechRecognition.start();
+
+    expect(mockOnError).toHaveBeenCalledTimes(1);
+    expect(mockOnError).toHaveBeenCalledWith(MicrophoneNotAllowedError);
+  })
+
+  it('calls onerror with SpeechRecognitionFailedError error when speech recognition fails on start', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+    const mockOnError = jest.fn();
+    speechRecognition.onerror = mockOnError;
+    mockInitialize.mockImplementationOnce(() => Promise.reject(new Error('generic failure')))
+
+    await speechRecognition.start();
+
+    expect(mockOnError).toHaveBeenCalledTimes(1);
+    expect(mockOnError).toHaveBeenCalledWith(SpeechRecognitionFailedError);
   })
 })
