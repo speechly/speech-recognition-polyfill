@@ -1,19 +1,30 @@
-<h1 align="center">
-<a href="https://www.speechly.com/?utm_source=github&utm_medium=browser-client&utm_campaign=header"><img src="https://www.speechly.com/images/logo.png" height="100" alt="Speechly"></a>
-</h1>
-<h2 align="center">
-Speechly is the Fast, Accurate, and Simple Voice Interface API for Web and Mobile Apps
-</h2>
+<div align="center" markdown="1">
+<a href="https://www.speechly.com/?utm_source=github&utm_medium=browser-client&utm_campaign=header">
+   <img src="https://d33wubrfki0l68.cloudfront.net/1e70457a60b0627de6ab966f1e0a40cf56f465f5/b4144/img/logo-speechly-colors.svg" height="48">
+</a>
 
-[Speechly website](https://www.speechly.com/?utm_source=github&utm_medium=browser-client&utm_campaign=header)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Docs](https://www.speechly.com/docs/?utm_source=github&utm_medium=browser-client&utm_campaign=headere)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Blog](https://www.speechly.com/blog/?utm_source=github&utm_medium=browser-client&utm_campaign=header)
+### Speechly is the Fast, Accurate, and Simple Voice Interface API for Web, Mobile and E‑commerce
 
-# speech-recognition-polyfill
+[Website](https://www.speechly.com/?utm_source=github&utm_medium=browser-client&utm_campaign=header)
+&ensp;|&ensp;
+[Docs](https://docs.speechly.com/)
+&ensp;|&ensp;
+[Discussions](https://github.com/speechly/speechly/discussions)
+&ensp;|&ensp;
+[Blog](https://www.speechly.com/blog/?utm_source=github&utm_medium=browser-client&utm_campaign=header)
+&ensp;|&ensp;
+[Podcast](https://anchor.fm/collin-borns/episodes/The-Speechly-Podcast---Introduction-e15htlq)
+
+---
+</div>
+
+# Speech recognition polyfill
 
 Polyfill for the [SpeechRecognition](https://wicg.github.io/speech-api/#speechreco-section) standard on web, using [Speechly](https://www.speechly.com/) as the underlying API. The primary use of this library is to enable speech recognition on browsers that would not normally support it natively.
 
 Speechly offers a free tier for its speech recognition API with a generous usage limit.
 
-# Useful links
+## Useful links
 
 * [Quickstart](#quickstart)
 * [Browser support](#browser-support)
@@ -25,15 +36,15 @@ Speechly offers a free tier for its speech recognition API with a generous usage
 * [Contributing](#contributing)
 * [About Speechly](#about-speechly)
 
-# Quickstart
+## Quickstart
 
-## Installation
+### Installation
 
 ```
 npm install --save @speechly/speech-recognition-polyfill
 ```
 
-## Basic usage
+### Basic usage
 
 First, you need a Speechly app ID. To get this, you can follow [this guide](https://docs.speechly.com/quick-start/stt-only/).
 
@@ -83,7 +94,7 @@ After calling `start()`, the microphone will be turned on and the recognition ob
 speechRecognition.stop();
 ```
 
-# Browser support
+## Browser support
 
 This polyfill is supported on all browsers except for Internet Explorer and very old versions of other browsers. On these browsers, an error will be thrown when creating a `SpeechlySpeechRecognition` object.
 
@@ -97,7 +108,7 @@ if (SpeechlySpeechRecognition.hasBrowserSupport) {
 }
 ```
 
-# Handling errors
+## Handling errors
 
 A common error case is when the user chooses not to give permission for the web app to access the microphone. This, and any other error emitted by this polyfill, can be handled via the `onerror` callback. In such cases, it's advised that you render some fallback UI as these errors will usually mean that voice-driven features will not work and should be disabled:
 
@@ -115,11 +126,11 @@ speechRecognition.onerror = (event) => {
 };
 ```
 
-# Examples
+## Examples
 
 The following examples use React to demonstrate how this polyfill can be used in real web components.
 
-## Matching commands
+### Matching commands
 
 A common use case is to enable the user to control a web app using their voice. The following example has a "hold to talk" button that enables transcription while held down. It provides a list of commands that, when matched by anything the user says, will be displayed. In practice, these matched commands could be used to perform actions.
 
@@ -165,7 +176,7 @@ export default () => {
 };
 ```
 
-## Displaying a transcript
+### Displaying a transcript
 
 You may want to simply display everything the user says as text, for composing a message for example. This example uses the same button as before. The transcripts are combined and collected in a local state, which is displayed as one piece of text.
 
@@ -204,7 +215,7 @@ export default () => {
 };
 ```
 
-# Integrating with react-speech-recognition
+## Integrating with react-speech-recognition
 
 This polyfill is compatible with `react-speech-recognition`, a React hook that manages the transcript for you and allows you to provide more powerful commands. For React web apps, we recommend you combine these libraries. See its [README](https://github.com/JamesBrill/react-speech-recognition) for full guidance on how to use `react-speech-recognition`. It can be installed with:
 
@@ -277,7 +288,7 @@ export default () => {
 };
 ```
 
-# Limitations
+## Limitations
 
 While this polyfill is intended to enable most use cases for voice-driven web apps, it does not implement the full [W3C specification](https://wicg.github.io/speech-api/#speechreco-section) for `SpeechRecognition`, only a subset:
 * `start()` method
@@ -295,15 +306,15 @@ Some notable limitations:
 * Transcripts are generated in uppercase letters without punctuation. If needed, you can transform them using [toLowerCase()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase)
 * `onerror` currently only supports the `not-allowed` (user denied permission to use the microphone) error and the `audio-capture` error, which is emitted for any other case where speech recognition fails. The full list in the spec can be found [here](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognitionErrorEvent/error)
 
-# Contributing
+## Contributing
 
 For a guide on how to develop `speech-recognition-polyfill` and contribute changes, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-# About Speechly
+## About Speechly
 
 Speechly is a developer tool for building real-time multimodal voice user interfaces. It enables developers and designers to enhance their current touch user interface with voice functionalities for better user experience. Speechly key features:
 
-## Speechly key features
+### Speechly key features
 
 - Fully streaming API
 - Multi modal from the ground up
