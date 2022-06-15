@@ -80,7 +80,7 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
-    "@speechly/browser-client": "^1.0.11"
+    "@speechly/browser-client": "^2.4.1"
   },
   "publishConfig": {
     "access": "public"
