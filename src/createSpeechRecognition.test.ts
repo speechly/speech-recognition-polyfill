@@ -22,17 +22,25 @@ let _callback: any;
 const mockOnSegmentChange = jest.fn((callback) => {
   _callback = callback;
 });
-const mockInitialize = jest.fn(() => Promise.resolve());
-const mockStartContext = jest.fn(() => Promise.resolve());
-const mockStopContext = jest.fn(() => Promise.resolve());
+const mockMicrophoneInitialize = jest.fn(() => Promise.resolve());
+const mockStart = jest.fn(() => Promise.resolve());
+const mockStop = jest.fn(() => Promise.resolve());
+const mockAttach = jest.fn(() => Promise.resolve());
+const mockMediaStream = { data: 'mockData' };
 jest.mock('@speechly/browser-client', () => ({
-  Client: function () {
+  BrowserClient: function () {
     return {
       onSegmentChange: mockOnSegmentChange,
-      initialize: mockInitialize,
-      startContext: mockStartContext,
-      stopContext: mockStopContext,
+      start: mockStart,
+      stop: mockStop,
+      attach: mockAttach,
     };
+  },
+  BrowserMicrophone: function () {
+    return {
+      initialize: mockMicrophoneInitialize,
+      mediaStream: mockMediaStream,
+    }
   }
 }));
 
@@ -48,20 +56,39 @@ const speakAndInterrupt = (sentence: any, interrupt: any) => {
 
 describe('createSpeechlySpeechRecognition', () => {
   beforeEach(() => {
-    mockInitialize.mockClear();
-    mockStartContext.mockClear();
-    mockStopContext.mockClear();
+    mockMicrophoneInitialize.mockClear();
+    mockStart.mockClear();
+    mockStop.mockClear();
     mockOnSegmentChange.mockClear();
+    mockAttach.mockClear();
   });
 
-  it('calls initialize and startContext on Speechly client when starting transcription', async () => {
+  it('calls microphone initialize on browser microphone when starting transcription', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
 
     await speechRecognition.start();
 
-    expect(mockInitialize).toHaveBeenCalledTimes(1);
-    expect(mockStartContext).toHaveBeenCalledTimes(1);
+    expect(mockMicrophoneInitialize).toHaveBeenCalledTimes(1);
+  })
+
+  it('calls attach on Speechly client with browser microphone media stream when starting transcription', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+
+    await speechRecognition.start();
+
+    expect(mockAttach).toHaveBeenCalledTimes(1);
+    expect(mockAttach).toHaveBeenCalledWith(mockMediaStream);
+  })
+
+  it('calls start on Speechly client when starting transcription', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+
+    await speechRecognition.start();
+
+    expect(mockStart).toHaveBeenCalledTimes(1);
   })
 
   it('calls given onresult for only the final result (interimResults: false)', async () => {
@@ -153,7 +180,7 @@ describe('createSpeechlySpeechRecognition', () => {
     expectSentenceToBeTranscribedWithInterimAndFinalResults(SENTENCE_ONE, mockOnResult);
   })
 
-  it('does not call initialize, stopContext or onend when stopping a transcription that was never started', async () => {
+  it('does not call initialize, stop or onend when stopping a transcription that was never started', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
     const mockOnEnd = jest.fn();
@@ -161,12 +188,12 @@ describe('createSpeechlySpeechRecognition', () => {
 
     await speechRecognition.stop();
 
-    expect(mockInitialize).toHaveBeenCalledTimes(0);
-    expect(mockStopContext).toHaveBeenCalledTimes(0);
+    expect(mockMicrophoneInitialize).toHaveBeenCalledTimes(0);
+    expect(mockStop).toHaveBeenCalledTimes(0);
     expect(mockOnEnd).toHaveBeenCalledTimes(0);
   })
 
-  it('calls initialize, stopContext or onend when stopping a transcription that has been started', async () => {
+  it('calls initialize, stop or onend when stopping a transcription that has been started', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
     const mockOnEnd = jest.fn();
@@ -175,12 +202,12 @@ describe('createSpeechlySpeechRecognition', () => {
     await speechRecognition.start();
     await speechRecognition.stop();
 
-    expect(mockInitialize).toHaveBeenCalledTimes(1);
-    expect(mockStopContext).toHaveBeenCalledTimes(1);
+    expect(mockMicrophoneInitialize).toHaveBeenCalledTimes(1);
+    expect(mockStop).toHaveBeenCalledTimes(1);
     expect(mockOnEnd).toHaveBeenCalledTimes(1);
   })
 
-  it('does not call initialize, stopContext or onend a second time when stopping a transcription that was already stopped', async () => {
+  it('does not call initialize, stop or onend a second time when stopping a transcription that was already stopped', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
     const mockOnEnd = jest.fn();
@@ -190,12 +217,12 @@ describe('createSpeechlySpeechRecognition', () => {
     await speechRecognition.stop();
     await speechRecognition.stop();
 
-    expect(mockInitialize).toHaveBeenCalledTimes(1);
-    expect(mockStopContext).toHaveBeenCalledTimes(1);
+    expect(mockMicrophoneInitialize).toHaveBeenCalledTimes(1);
+    expect(mockStop).toHaveBeenCalledTimes(1);
     expect(mockOnEnd).toHaveBeenCalledTimes(1);
   })
 
-  it('does not call initialize, stopContext or onend when aborting a transcription that was never started', async () => {
+  it('does not call initialize, stop or onend when aborting a transcription that was never started', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
     const mockOnEnd = jest.fn();
@@ -203,12 +230,12 @@ describe('createSpeechlySpeechRecognition', () => {
 
     await speechRecognition.abort();
 
-    expect(mockInitialize).toHaveBeenCalledTimes(0);
-    expect(mockStopContext).toHaveBeenCalledTimes(0);
+    expect(mockMicrophoneInitialize).toHaveBeenCalledTimes(0);
+    expect(mockStop).toHaveBeenCalledTimes(0);
     expect(mockOnEnd).toHaveBeenCalledTimes(0);
   })
 
-  it('calls initialize, stopContext or onend when aborting a transcription that has been started', async () => {
+  it('calls initialize, stop or onend when aborting a transcription that has been started', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
     const mockOnEnd = jest.fn();
@@ -217,12 +244,12 @@ describe('createSpeechlySpeechRecognition', () => {
     await speechRecognition.start();
     await speechRecognition.abort();
 
-    expect(mockInitialize).toHaveBeenCalledTimes(1);
-    expect(mockStopContext).toHaveBeenCalledTimes(1);
+    expect(mockMicrophoneInitialize).toHaveBeenCalledTimes(1);
+    expect(mockStop).toHaveBeenCalledTimes(1);
     expect(mockOnEnd).toHaveBeenCalledTimes(1);
   })
 
-  it('does not call initialize, stopContext or onend a second time when aborting a transcription that was already aborted', async () => {
+  it('does not call initialize, stop or onend a second time when aborting a transcription that was already aborted', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
     const mockOnEnd = jest.fn();
@@ -232,8 +259,8 @@ describe('createSpeechlySpeechRecognition', () => {
     await speechRecognition.abort();
     await speechRecognition.abort();
 
-    expect(mockInitialize).toHaveBeenCalledTimes(1);
-    expect(mockStopContext).toHaveBeenCalledTimes(1);
+    expect(mockMicrophoneInitialize).toHaveBeenCalledTimes(1);
+    expect(mockStop).toHaveBeenCalledTimes(1);
     expect(mockOnEnd).toHaveBeenCalledTimes(1);
   })
 
@@ -364,7 +391,7 @@ describe('createSpeechlySpeechRecognition', () => {
     const speechRecognition = new SpeechRecognition();
     const mockOnError = jest.fn();
     speechRecognition.onerror = mockOnError;
-    mockInitialize.mockImplementationOnce(() => Promise.reject(ErrNoAudioConsent))
+    mockMicrophoneInitialize.mockImplementationOnce(() => Promise.reject(ErrNoAudioConsent))
 
     await speechRecognition.start();
 
@@ -377,7 +404,7 @@ describe('createSpeechlySpeechRecognition', () => {
     const speechRecognition = new SpeechRecognition();
     const mockOnError = jest.fn();
     speechRecognition.onerror = mockOnError;
-    mockInitialize.mockImplementationOnce(() => Promise.reject(new Error('generic failure')))
+    mockMicrophoneInitialize.mockImplementationOnce(() => Promise.reject(new Error('generic failure')))
 
     await speechRecognition.start();
 
