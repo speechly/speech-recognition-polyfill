@@ -1,4 +1,10 @@
-import { BrowserClient, BrowserMicrophone, ErrNoAudioConsent, Segment } from '@speechly/browser-client'
+import {
+  BrowserClient,
+  BrowserMicrophone,
+  ErrDeviceNotSupported,
+  ErrNoAudioConsent,
+  Segment,
+} from '@speechly/browser-client'
 import {
   SpeechRecognitionEventCallback,
   SpeechEndCallback,
@@ -71,9 +77,11 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
       if (!this.clientInitialised) {
         const microphone = new BrowserMicrophone()
         await microphone.initialize()
-        // TODO: throw?
-        if (microphone.mediaStream === undefined) return
-        await this.client.attach(microphone.mediaStream)
+        const { mediaStream } = microphone
+        if (mediaStream === null || mediaStream === undefined) {
+          throw ErrDeviceNotSupported
+        }
+        await this.client.attach(mediaStream)
         this.clientInitialised = true
       }
     }
