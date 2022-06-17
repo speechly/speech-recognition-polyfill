@@ -1,4 +1,5 @@
-import { ErrNoAudioConsent } from '@speechly/browser-client'
+import { mocked } from 'ts-jest/utils';
+import { BrowserMicrophone, ErrNoAudioConsent } from '@speechly/browser-client'
 import createSpeechlySpeechRecognition from './createSpeechRecognition';
 import { MicrophoneNotAllowedError, SpeechRecognitionFailedError } from './types';
 import {
@@ -27,6 +28,17 @@ const mockStart = jest.fn(() => Promise.resolve());
 const mockStop = jest.fn(() => Promise.resolve());
 const mockAttach = jest.fn(() => Promise.resolve());
 const mockMediaStream = { data: 'mockData' };
+const MockBrowserMicrophone = mocked(BrowserMicrophone, true);
+
+const mockBrowserMicrophone = ({ mediaStream }: { mediaStream: typeof mockMediaStream | null }) => {
+  MockBrowserMicrophone.mockImplementation(function () {
+    return {
+      initialize: mockMicrophoneInitialize,
+      mediaStream,
+    } as any;
+  });
+};
+
 jest.mock('@speechly/browser-client', () => ({
   BrowserClient: function () {
     return {
@@ -36,12 +48,8 @@ jest.mock('@speechly/browser-client', () => ({
       attach: mockAttach,
     };
   },
-  BrowserMicrophone: function () {
-    return {
-      initialize: mockMicrophoneInitialize,
-      mediaStream: mockMediaStream,
-    }
-  }
+  BrowserMicrophone: jest.fn(),
+  ErrNoAudioConsent: jest.fn(),
 }));
 
 const speak = (sentence: any) => {
@@ -56,6 +64,8 @@ const speakAndInterrupt = (sentence: any, interrupt: any) => {
 
 describe('createSpeechlySpeechRecognition', () => {
   beforeEach(() => {
+    MockBrowserMicrophone.mockClear();
+    mockBrowserMicrophone({ mediaStream: mockMediaStream });
     mockMicrophoneInitialize.mockClear();
     mockStart.mockClear();
     mockStop.mockClear();
@@ -405,6 +415,32 @@ describe('createSpeechlySpeechRecognition', () => {
     const mockOnError = jest.fn();
     speechRecognition.onerror = mockOnError;
     mockMicrophoneInitialize.mockImplementationOnce(() => Promise.reject(new Error('generic failure')))
+
+    await speechRecognition.start();
+
+    expect(mockOnError).toHaveBeenCalledTimes(1);
+    expect(mockOnError).toHaveBeenCalledWith(SpeechRecognitionFailedError);
+  })
+
+  it('calls onerror with SpeechRecognitionFailedError error when speech recognition fails on attach', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+    const mockOnError = jest.fn();
+    speechRecognition.onerror = mockOnError;
+    mockAttach.mockImplementationOnce(() => Promise.reject(new Error('generic failure')))
+
+    await speechRecognition.start();
+
+    expect(mockOnError).toHaveBeenCalledTimes(1);
+    expect(mockOnError).toHaveBeenCalledWith(SpeechRecognitionFailedError);
+  })
+
+  it('calls onerror with SpeechRecognitionFailedError error when browser microphone media stream is falsey', async () => {
+    const SpeechRecognition = createSpeechlySpeechRecognition('app id');
+    const speechRecognition = new SpeechRecognition();
+    const mockOnError = jest.fn();
+    speechRecognition.onerror = mockOnError;
+    mockBrowserMicrophone({ mediaStream: null });
 
     await speechRecognition.start();
 
