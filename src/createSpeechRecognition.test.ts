@@ -73,7 +73,7 @@ describe('createSpeechlySpeechRecognition', () => {
     mockAttach.mockClear();
   });
 
-  it('calls microphone initialize on browser microphone when starting transcription', async () => {
+  it('calls initialize on browser microphone when starting transcription', async () => {
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
 
