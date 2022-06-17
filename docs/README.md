@@ -137,4 +137,4 @@ to generate transcriptions using the Speechly API
 
 Class that implements the SpeechRecognition interface
 
-Defined in: [createSpeechRecognition.ts:21](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/createSpeechRecognition.ts#L21)
+Defined in: [createSpeechRecognition.ts:27](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/createSpeechRecognition.ts#L27)
