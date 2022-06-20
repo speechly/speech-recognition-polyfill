@@ -1,4 +1,10 @@
-import { Client, ErrNoAudioConsent, Segment } from '@speechly/browser-client'
+import {
+  BrowserClient,
+  BrowserMicrophone,
+  ErrDeviceNotSupported,
+  ErrNoAudioConsent,
+  Segment,
+} from '@speechly/browser-client'
 import {
   SpeechRecognitionEventCallback,
   SpeechEndCallback,
@@ -27,7 +33,7 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
   return class SpeechlySpeechRecognition implements SpeechRecognition {
     static readonly hasBrowserSupport: boolean = browserSupportsAudioApis
 
-    private readonly client: Client
+    private readonly client: BrowserClient
     private clientInitialised = false
     private aborted = false
     private transcribing = false
@@ -39,7 +45,7 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
     onerror: SpeechErrorCallback = () => {}
 
     constructor() {
-      this.client = new Client({ appId })
+      this.client = new BrowserClient({ appId })
       this.client.onSegmentChange(this.handleResult)
     }
 
@@ -47,7 +53,7 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
       try {
         this.aborted = false
         await this.initialise()
-        await this.client.startContext()
+        await this.client.start()
         this.transcribing = true
       } catch (e) {
         if (e === ErrNoAudioConsent) {
@@ -69,7 +75,13 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
 
     private readonly initialise = async (): Promise<void> => {
       if (!this.clientInitialised) {
-        await this.client.initialize()
+        const microphone = new BrowserMicrophone()
+        await microphone.initialize()
+        const { mediaStream } = microphone
+        if (mediaStream === null || mediaStream === undefined) {
+          throw ErrDeviceNotSupported
+        }
+        await this.client.attach(mediaStream)
         this.clientInitialised = true
       }
     }
@@ -80,7 +92,7 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
       }
       await this.initialise()
       try {
-        await this.client.stopContext()
+        await this.client.stop()
         this.transcribing = false
         this.onend()
       } catch (e) {
