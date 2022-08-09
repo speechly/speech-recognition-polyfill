@@ -96,7 +96,7 @@ speechRecognition.stop();
 
 ## Browser support
 
-This polyfill is supported on all browsers except for Internet Explorer and very old versions of other browsers. On these browsers, an error will be thrown when creating a `SpeechlySpeechRecognition` object.
+This polyfill will work on browsers that support the [MediaDevices](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices) and [AudioContext](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext) APIs, which covers roughly 95% of web users in 2022. The exceptions are Internet Explorer and most browsers from before 2016. On these browsers, an error will be thrown when creating a `SpeechlySpeechRecognition` object.
 
 The `SpeechlySpeechRecognition` class offers the `hasBrowserSupport` flag to check whether the browser supports the required APIs. We recommend you do the following when creating your speech recognition object:
 ```
