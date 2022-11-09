@@ -37,7 +37,7 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
     private readonly microphone: BrowserMicrophone
     private aborted = false
     private transcribing = false
-    private listenPromise: Promise<void> | null = null
+    private taskQueue: Promise<void> | null = null
 
     continuous = false
     interimResults = false
@@ -80,9 +80,7 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
 
       this.transcribing = true
 
-      this.listenPromise = (async () => {
-        // Wait for earlier task(s) to complete, effectively adding to a task queue
-        await this.listenPromise
+      const startTask = async (): Promise<void> => {
         await this.microphone.initialize()
         const { mediaStream } = this.microphone
         if (mediaStream === null || mediaStream === undefined) {
@@ -90,9 +88,8 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
         }
         await this.client.attach(mediaStream)
         await this.client.start()
-      })()
-
-      await this.listenPromise
+      }
+      await this.enqueueTask(startTask)
     }
 
     private readonly _stop = async (): Promise<void> => {
@@ -102,9 +99,7 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
 
       this.transcribing = false
 
-      this.listenPromise = (async () => {
-        // Wait for earlier task(s) to complete, effectively adding to a task queue
-        await this.listenPromise
+      const stopTask = async (): Promise<void> => {
         try {
           await this.client.stop()
           await this.client.detach()
@@ -113,9 +108,19 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
         } catch (e) {
           // swallow errors
         }
-      })()
+      }
+      await this.enqueueTask(stopTask)
+    }
 
-      await this.listenPromise
+    private readonly enqueueTask = async (task: () => Promise<void>): Promise<void> => {
+      const queuedTask = async (): Promise<void> => {
+        // Wait for earlier task(s) to complete, effectively adding to a task queue
+        await this.taskQueue
+        await task()
+      }
+      this.taskQueue = queuedTask()
+
+      await this.taskQueue
     }
 
     private readonly handleResult = (segment: Segment): void => {
