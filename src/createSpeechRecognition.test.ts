@@ -438,11 +438,11 @@ describe('createSpeechlySpeechRecognition', () => {
   })
 
   it('calls onerror with SpeechRecognitionFailedError error when browser microphone media stream is falsey', async () => {
+    mockBrowserMicrophone({ mediaStream: null });
     const SpeechRecognition = createSpeechlySpeechRecognition('app id');
     const speechRecognition = new SpeechRecognition();
     const mockOnError = jest.fn();
     speechRecognition.onerror = mockOnError;
-    mockBrowserMicrophone({ mediaStream: null });
 
     await speechRecognition.start();
 
