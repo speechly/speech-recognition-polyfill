@@ -24,9 +24,11 @@ const mockOnSegmentChange = jest.fn((callback) => {
   _callback = callback;
 });
 const mockMicrophoneInitialize = jest.fn(() => Promise.resolve());
+const mockMicrophoneClose = jest.fn(() => Promise.resolve());
 const mockStart = jest.fn(() => Promise.resolve());
 const mockStop = jest.fn(() => Promise.resolve());
 const mockAttach = jest.fn(() => Promise.resolve());
+const mockDetach = jest.fn(() => Promise.resolve());
 const mockMediaStream = { data: 'mockData' };
 const MockBrowserMicrophone = mocked(BrowserMicrophone, true);
 
@@ -34,7 +36,7 @@ const mockBrowserMicrophone = ({ mediaStream }: { mediaStream: typeof mockMediaS
   MockBrowserMicrophone.mockImplementation(function () {
     return {
       initialize: mockMicrophoneInitialize,
-      close: jest.fn(),
+      close: mockMicrophoneClose,
       mediaStream,
     } as any;
   });
@@ -47,7 +49,7 @@ jest.mock('@speechly/browser-client', () => ({
       start: mockStart,
       stop: mockStop,
       attach: mockAttach,
-      detach: jest.fn(),
+      detach: mockDetach,
     };
   },
   BrowserMicrophone: jest.fn(),
@@ -69,10 +71,12 @@ describe('createSpeechlySpeechRecognition', () => {
     MockBrowserMicrophone.mockClear();
     mockBrowserMicrophone({ mediaStream: mockMediaStream });
     mockMicrophoneInitialize.mockClear();
+    mockMicrophoneClose.mockClear();
     mockStart.mockClear();
     mockStop.mockClear();
     mockOnSegmentChange.mockClear();
     mockAttach.mockClear();
+    mockDetach.mockClear();
   });
 
   it('calls initialize on browser microphone when starting transcription', async () => {
@@ -202,6 +206,8 @@ describe('createSpeechlySpeechRecognition', () => {
 
     expect(mockMicrophoneInitialize).toHaveBeenCalledTimes(0);
     expect(mockStop).toHaveBeenCalledTimes(0);
+    expect(mockDetach).toHaveBeenCalledTimes(0);
+    expect(mockMicrophoneClose).toHaveBeenCalledTimes(0);
     expect(mockOnEnd).toHaveBeenCalledTimes(0);
   })
 
@@ -216,6 +222,8 @@ describe('createSpeechlySpeechRecognition', () => {
 
     expect(mockMicrophoneInitialize).toHaveBeenCalledTimes(1);
     expect(mockStop).toHaveBeenCalledTimes(1);
+    expect(mockDetach).toHaveBeenCalledTimes(1);
+    expect(mockMicrophoneClose).toHaveBeenCalledTimes(1);
     expect(mockOnEnd).toHaveBeenCalledTimes(1);
   })
 
@@ -231,6 +239,8 @@ describe('createSpeechlySpeechRecognition', () => {
 
     expect(mockMicrophoneInitialize).toHaveBeenCalledTimes(1);
     expect(mockStop).toHaveBeenCalledTimes(1);
+    expect(mockDetach).toHaveBeenCalledTimes(1);
+    expect(mockMicrophoneClose).toHaveBeenCalledTimes(1);
     expect(mockOnEnd).toHaveBeenCalledTimes(1);
   })
 
@@ -244,6 +254,8 @@ describe('createSpeechlySpeechRecognition', () => {
 
     expect(mockMicrophoneInitialize).toHaveBeenCalledTimes(0);
     expect(mockStop).toHaveBeenCalledTimes(0);
+    expect(mockDetach).toHaveBeenCalledTimes(0);
+    expect(mockMicrophoneClose).toHaveBeenCalledTimes(0);
     expect(mockOnEnd).toHaveBeenCalledTimes(0);
   })
 
@@ -258,6 +270,8 @@ describe('createSpeechlySpeechRecognition', () => {
 
     expect(mockMicrophoneInitialize).toHaveBeenCalledTimes(1);
     expect(mockStop).toHaveBeenCalledTimes(1);
+    expect(mockDetach).toHaveBeenCalledTimes(1);
+    expect(mockMicrophoneClose).toHaveBeenCalledTimes(1);
     expect(mockOnEnd).toHaveBeenCalledTimes(1);
   })
 
@@ -273,6 +287,8 @@ describe('createSpeechlySpeechRecognition', () => {
 
     expect(mockMicrophoneInitialize).toHaveBeenCalledTimes(1);
     expect(mockStop).toHaveBeenCalledTimes(1);
+    expect(mockDetach).toHaveBeenCalledTimes(1);
+    expect(mockMicrophoneClose).toHaveBeenCalledTimes(1);
     expect(mockOnEnd).toHaveBeenCalledTimes(1);
   })
 
