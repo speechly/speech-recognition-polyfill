@@ -32,9 +32,9 @@ Stop transcribing utterances received from the microphone, and cut off the curre
 
 **Returns:** *Promise*<void\>
 
-Defined in: [types.ts:145](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L145)
+Defined in: [types.ts:145](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L145)
 
-Defined in: [types.ts:145](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L145)
+Defined in: [types.ts:145](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L145)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 Should the microphone listen continuously (true) or should it stop after the first utterance (false)?
 
-Defined in: [types.ts:114](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L114)
+Defined in: [types.ts:114](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L114)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 Should interim results be emitted? These are parts of an ongoing utterance for which transcription hasn't
 completed yet
 
-Defined in: [types.ts:119](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L119)
+Defined in: [types.ts:119](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L119)
 
 ___
 
@@ -67,7 +67,7 @@ Callback that is invoked when transcription ends
 
 **`param`** Event containing updates to the transcript
 
-Defined in: [types.ts:128](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L128)
+Defined in: [types.ts:128](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L128)
 
 ___
 
@@ -79,7 +79,7 @@ Callback that is invoked when an error occurs
 
 **`param`** Event containing details of the error
 
-Defined in: [types.ts:133](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L133)
+Defined in: [types.ts:133](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L133)
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 Callback that is invoked whenever the transcript updates
 
-Defined in: [types.ts:123](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L123)
+Defined in: [types.ts:123](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L123)
 
 ___
 
@@ -105,9 +105,9 @@ Start transcribing utterances received from the microphone
 
 **Returns:** *Promise*<void\>
 
-Defined in: [types.ts:137](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L137)
+Defined in: [types.ts:137](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L137)
 
-Defined in: [types.ts:137](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L137)
+Defined in: [types.ts:137](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L137)
 
 ___
 
@@ -123,6 +123,6 @@ Stop transcribing utterances received from the microphone, but finish processing
 
 **Returns:** *Promise*<void\>
 
-Defined in: [types.ts:141](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L141)
+Defined in: [types.ts:141](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L141)
 
-Defined in: [types.ts:141](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L141)
+Defined in: [types.ts:141](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L141)
