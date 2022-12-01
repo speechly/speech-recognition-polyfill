@@ -34,6 +34,7 @@ const mockBrowserMicrophone = ({ mediaStream }: { mediaStream: typeof mockMediaS
   MockBrowserMicrophone.mockImplementation(function () {
     return {
       initialize: mockMicrophoneInitialize,
+      close: jest.fn(),
       mediaStream,
     } as any;
   });
@@ -46,6 +47,7 @@ jest.mock('@speechly/browser-client', () => ({
       start: mockStart,
       stop: mockStop,
       attach: mockAttach,
+      detach: jest.fn(),
     };
   },
   BrowserMicrophone: jest.fn(),
