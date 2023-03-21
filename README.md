@@ -1,21 +1,19 @@
 <div align="center" markdown="1">
-<a href="https://www.speechly.com">
-   <img src="https://d33wubrfki0l68.cloudfront.net/f15fc952956e1952d6bd23661b7a7ee6b775faaa/c1b30/img/speechly-logo-duo-black.svg" height="48" />
-</a>
+<br/>
 
-### Real-time automatic speech recognition and natural language understanding tools in one flexible API
+![speechly-logo-duo-black](https://user-images.githubusercontent.com/2579244/193574443-130d16d6-76f1-4401-90f2-0ed753b39bc0.svg)
 
 [Website](https://www.speechly.com/)
-&ensp;|&ensp;
+&ensp;&middot;&ensp;
 [Docs](https://docs.speechly.com/)
-&ensp;|&ensp;
-[Discussions](https://github.com/speechly/speechly/discussions)
-&ensp;|&ensp;
+&ensp;&middot;&ensp;
+[Support](https://github.com/speechly/speechly/discussions)
+&ensp;&middot;&ensp;
 [Blog](https://www.speechly.com/blog/)
-&ensp;|&ensp;
-[Podcast](https://anchor.fm/the-speechly-podcast)
+&ensp;&middot;&ensp;
+[Login](https://api.speechly.com/dashboard/)
 
----
+<br/>
 </div>
 
 # Speech recognition polyfill
@@ -46,9 +44,15 @@ npm install --save @speechly/speech-recognition-polyfill
 
 ### Basic usage
 
-First, you need a Speechly app ID. To get this, you can follow [this guide](https://docs.speechly.com/quick-start/stt-only/).
+First, you need a Speechly Application ID:
 
-Once you have an app ID, you can use it to create a recognition object that can start transcribing anything the user speaks into the microphone:
+1. Log in to [Speechly Dashboard](https://api.speechly.com/dashboard/)
+2. Open [Create a new application](https://api.speechly.com/dashboard/#/app/new)
+3. Give your application a name and press **Create application**
+4. **Deploy** the application
+5. Copy the **App ID**, you'll need it the next step.
+
+Once you have your App ID, you can use it to create a recognition object that can start transcribing anything the user speaks into the microphone:
 
 ```
 import { createSpeechlySpeechRecognition } from '@speechly/speech-recognition-polyfill';

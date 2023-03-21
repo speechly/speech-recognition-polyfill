@@ -19,7 +19,7 @@ Data associated with an error emitted from the recognition service
 
 Type of error raised
 
-Defined in: [types.ts:61](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L61)
+Defined in: [types.ts:61](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L61)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 Message describing the error in more detail
 
-Defined in: [types.ts:65](https://github.com/JamesBrill/speech-recognition-polyfill/blob/HEAD/src/types.ts#L65)
+Defined in: [types.ts:65](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L65)

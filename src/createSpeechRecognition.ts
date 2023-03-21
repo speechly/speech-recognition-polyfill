@@ -34,9 +34,10 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
     static readonly hasBrowserSupport: boolean = browserSupportsAudioApis
 
     private readonly client: BrowserClient
-    private clientInitialised = false
+    private readonly microphone: BrowserMicrophone
     private aborted = false
     private transcribing = false
+    private taskQueue: Promise<void> | null = null
 
     continuous = false
     interimResults = false
@@ -46,15 +47,14 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
 
     constructor() {
       this.client = new BrowserClient({ appId })
+      this.microphone = new BrowserMicrophone()
       this.client.onSegmentChange(this.handleResult)
     }
 
     public start = async (): Promise<void> => {
       try {
         this.aborted = false
-        await this.initialise()
-        await this.client.start()
-        this.transcribing = true
+        await this._start()
       } catch (e) {
         if (e === ErrNoAudioConsent) {
           this.onerror(MicrophoneNotAllowedError)
@@ -73,31 +73,54 @@ export const createSpeechlySpeechRecognition = (appId: string): SpeechRecognitio
       await this._stop()
     }
 
-    private readonly initialise = async (): Promise<void> => {
-      if (!this.clientInitialised) {
-        const microphone = new BrowserMicrophone()
-        await microphone.initialize()
-        const { mediaStream } = microphone
+    private readonly _start = async (): Promise<void> => {
+      if (this.transcribing) {
+        return
+      }
+
+      this.transcribing = true
+
+      const startTask = async (): Promise<void> => {
+        await this.microphone.initialize()
+        const { mediaStream } = this.microphone
         if (mediaStream === null || mediaStream === undefined) {
           throw ErrDeviceNotSupported
         }
         await this.client.attach(mediaStream)
-        this.clientInitialised = true
+        await this.client.start()
       }
+      await this.enqueueTask(startTask)
     }
 
     private readonly _stop = async (): Promise<void> => {
       if (!this.transcribing) {
         return
       }
-      await this.initialise()
-      try {
-        await this.client.stop()
-        this.transcribing = false
-        this.onend()
-      } catch (e) {
-        // swallow errors
+
+      this.transcribing = false
+
+      const stopTask = async (): Promise<void> => {
+        try {
+          await this.client.stop()
+          await this.client.detach()
+          await this.microphone.close()
+          this.onend()
+        } catch (e) {
+          // swallow errors
+        }
       }
+      await this.enqueueTask(stopTask)
+    }
+
+    private readonly enqueueTask = async (task: () => Promise<void>): Promise<void> => {
+      const queuedTask = async (): Promise<void> => {
+        // Wait for earlier task(s) to complete, effectively adding to a task queue
+        await this.taskQueue
+        await task()
+      }
+      this.taskQueue = queuedTask()
+
+      await this.taskQueue
     }
 
     private readonly handleResult = (segment: Segment): void => {
