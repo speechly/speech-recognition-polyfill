@@ -6,7 +6,8 @@ A polyfill (a "[ponyfill](https://ponyfoo.com/articles/polyfills-or-ponyfills)" 
 [SpeechRecognition API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition) that uses
 [Speechly](https://www.speechly.com/) to implement the transcription functionality
 
-**`remarks`** 
+**`Remarks`**
+
 The implementation of the [SpeechRecognition spec](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition)
 is incomplete, but should enable the majority of use cases
 
@@ -14,14 +15,14 @@ is incomplete, but should enable the majority of use cases
 
 ### Interfaces
 
-- [SpeechRecognition](interfaces/speechrecognition.md)
-- [SpeechRecognitionAlternative](interfaces/speechrecognitionalternative.md)
-- [SpeechRecognitionClass](interfaces/speechrecognitionclass.md)
-- [SpeechRecognitionErrorEvent](interfaces/speechrecognitionerrorevent.md)
-- [SpeechRecognitionEvent](interfaces/speechrecognitionevent.md)
-- [SpeechRecognitionResult](interfaces/speechrecognitionresult.md)
+- [SpeechRecognition](interfaces/SpeechRecognition.md)
+- [SpeechRecognitionAlternative](interfaces/SpeechRecognitionAlternative.md)
+- [SpeechRecognitionClass](interfaces/SpeechRecognitionClass.md)
+- [SpeechRecognitionErrorEvent](interfaces/SpeechRecognitionErrorEvent.md)
+- [SpeechRecognitionEvent](interfaces/SpeechRecognitionEvent.md)
+- [SpeechRecognitionResult](interfaces/SpeechRecognitionResult.md)
 
-### Type aliases
+### Type Aliases
 
 - [SpeechEndCallback](README.md#speechendcallback)
 - [SpeechErrorCallback](README.md#speecherrorcallback)
@@ -36,105 +37,123 @@ is incomplete, but should enable the majority of use cases
 
 - [createSpeechlySpeechRecognition](README.md#createspeechlyspeechrecognition)
 
-## Type aliases
+## Type Aliases
 
 ### SpeechEndCallback
 
-Ƭ **SpeechEndCallback**: () => *void*
+Ƭ **SpeechEndCallback**: () => `void`
+
+#### Type declaration
+
+▸ (): `void`
 
 Callback that is invoked when transcription ends
 
-#### Type declaration:
+##### Returns
 
-▸ (): *void*
+`void`
 
-**Returns:** *void*
+#### Defined in
 
-Defined in: [types.ts:97](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L97)
+[types.ts:97](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L97)
 
 ___
 
 ### SpeechErrorCallback
 
-Ƭ **SpeechErrorCallback**: (`speechRecognitionErrorEvent`: [*SpeechRecognitionErrorEvent*](interfaces/speechrecognitionerrorevent.md)) => *void*
+Ƭ **SpeechErrorCallback**: (`speechRecognitionErrorEvent`: [`SpeechRecognitionErrorEvent`](interfaces/SpeechRecognitionErrorEvent.md)) => `void`
+
+#### Type declaration
+
+▸ (`speechRecognitionErrorEvent`): `void`
 
 Callback that is invoked when an error occurs
 
-#### Type declaration:
-
-▸ (`speechRecognitionErrorEvent`: [*SpeechRecognitionErrorEvent*](interfaces/speechrecognitionerrorevent.md)): *void*
-
-#### Parameters:
+##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `speechRecognitionErrorEvent` | [*SpeechRecognitionErrorEvent*](interfaces/speechrecognitionerrorevent.md) |
+| `speechRecognitionErrorEvent` | [`SpeechRecognitionErrorEvent`](interfaces/SpeechRecognitionErrorEvent.md) |
 
-**Returns:** *void*
+##### Returns
 
-Defined in: [types.ts:103](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L103)
+`void`
+
+#### Defined in
+
+[types.ts:103](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L103)
 
 ___
 
 ### SpeechRecognitionEventCallback
 
-Ƭ **SpeechRecognitionEventCallback**: (`speechRecognitionEvent`: [*SpeechRecognitionEvent*](interfaces/speechrecognitionevent.md)) => *void*
+Ƭ **SpeechRecognitionEventCallback**: (`speechRecognitionEvent`: [`SpeechRecognitionEvent`](interfaces/SpeechRecognitionEvent.md)) => `void`
+
+#### Type declaration
+
+▸ (`speechRecognitionEvent`): `void`
 
 Callback that is invoked whenever the transcript gets updated
 
-**`param`** Event containing updates to the transcript
+##### Parameters
 
-#### Type declaration:
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `speechRecognitionEvent` | [`SpeechRecognitionEvent`](interfaces/SpeechRecognitionEvent.md) | Event containing updates to the transcript |
 
-▸ (`speechRecognitionEvent`: [*SpeechRecognitionEvent*](interfaces/speechrecognitionevent.md)): *void*
+##### Returns
 
-#### Parameters:
+`void`
 
-| Name | Type |
-| :------ | :------ |
-| `speechRecognitionEvent` | [*SpeechRecognitionEvent*](interfaces/speechrecognitionevent.md) |
+#### Defined in
 
-**Returns:** *void*
-
-Defined in: [types.ts:91](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L91)
+[types.ts:91](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L91)
 
 ## Variables
 
 ### MicrophoneNotAllowedError
 
-• `Const` **MicrophoneNotAllowedError**: [*SpeechRecognitionErrorEvent*](interfaces/speechrecognitionerrorevent.md)
+• `Const` **MicrophoneNotAllowedError**: [`SpeechRecognitionErrorEvent`](interfaces/SpeechRecognitionErrorEvent.md)
 
 Error emitted when the user does not give permission to use the microphone
 
-Defined in: [types.ts:72](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L72)
+#### Defined in
+
+[types.ts:72](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L72)
 
 ___
 
 ### SpeechRecognitionFailedError
 
-• `Const` **SpeechRecognitionFailedError**: [*SpeechRecognitionErrorEvent*](interfaces/speechrecognitionerrorevent.md)
+• `Const` **SpeechRecognitionFailedError**: [`SpeechRecognitionErrorEvent`](interfaces/SpeechRecognitionErrorEvent.md)
 
 Generic error when speech recognition fails due to an unknown cause
 
-Defined in: [types.ts:81](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L81)
+#### Defined in
+
+[types.ts:81](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L81)
 
 ## Functions
 
 ### createSpeechlySpeechRecognition
 
-▸ `Const`**createSpeechlySpeechRecognition**(`appId`: *string*): [*SpeechRecognitionClass*](interfaces/speechrecognitionclass.md)
+▸ **createSpeechlySpeechRecognition**(`appId`): [`SpeechRecognitionClass`](interfaces/SpeechRecognitionClass.md)
 
 Returns a SpeechRecognition implementation that uses a given Speechly app ID
 to generate transcriptions using the Speechly API
 
-#### Parameters:
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `appId` | *string* | Speechly app ID |
+| `appId` | `string` | Speechly app ID |
 
-**Returns:** [*SpeechRecognitionClass*](interfaces/speechrecognitionclass.md)
+#### Returns
+
+[`SpeechRecognitionClass`](interfaces/SpeechRecognitionClass.md)
 
 Class that implements the SpeechRecognition interface
 
-Defined in: [createSpeechRecognition.ts:27](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/createSpeechRecognition.ts#L27)
+#### Defined in
+
+[createSpeechRecognition.ts:27](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/createSpeechRecognition.ts#L27)
