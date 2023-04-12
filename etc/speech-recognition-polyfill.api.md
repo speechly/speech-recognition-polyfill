@@ -8,16 +8,16 @@
 export const createSpeechlySpeechRecognition: (appId: string) => SpeechRecognitionClass;
 
 // @public
-export const MicrophoneNotAllowedError: SpeechRecognitionErrorEvent_2;
+export const MicrophoneNotAllowedError: SpeechRecognitionErrorEvent;
 
 // @public
 export type SpeechEndCallback = () => void;
 
 // @public
-export type SpeechErrorCallback = (speechRecognitionErrorEvent: SpeechRecognitionErrorEvent_2) => void;
+export type SpeechErrorCallback = (speechRecognitionErrorEvent: SpeechRecognitionErrorEvent) => void;
 
 // @public
-interface SpeechRecognition_2 {
+export interface SpeechRecognition {
     abort: () => Promise<void>;
     continuous: boolean;
     interimResults: boolean;
@@ -28,51 +28,42 @@ interface SpeechRecognition_2 {
     stop: () => Promise<void>;
 }
 
-export { SpeechRecognition_2 as SpeechRecognition }
-
 // @public
 interface SpeechRecognitionAlternative_2 {
     confidence: number;
     transcript: string;
 }
-
 export { SpeechRecognitionAlternative_2 as SpeechRecognitionAlternative }
 
 // @public
 export interface SpeechRecognitionClass {
-    new (): SpeechRecognition_2;
+    new (): SpeechRecognition;
     readonly hasBrowserSupport: boolean;
 }
 
 // @public
-interface SpeechRecognitionErrorEvent_2 {
+export interface SpeechRecognitionErrorEvent {
     error: 'not-allowed' | 'audio-capture';
     message: string;
 }
 
-export { SpeechRecognitionErrorEvent_2 as SpeechRecognitionErrorEvent }
-
 // @public
-interface SpeechRecognitionEvent_2 {
+export interface SpeechRecognitionEvent {
     resultIndex: number;
     results: SpeechRecognitionResult_2[];
 }
 
-export { SpeechRecognitionEvent_2 as SpeechRecognitionEvent }
+// @public
+export type SpeechRecognitionEventCallback = (speechRecognitionEvent: SpeechRecognitionEvent) => void;
 
 // @public
-export type SpeechRecognitionEventCallback = (speechRecognitionEvent: SpeechRecognitionEvent_2) => void;
-
-// @public
-export const SpeechRecognitionFailedError: SpeechRecognitionErrorEvent_2;
+export const SpeechRecognitionFailedError: SpeechRecognitionErrorEvent;
 
 // @public
 interface SpeechRecognitionResult_2 {
     0: SpeechRecognitionAlternative_2;
     isFinal: boolean;
 }
-
 export { SpeechRecognitionResult_2 as SpeechRecognitionResult }
-
 
 ```

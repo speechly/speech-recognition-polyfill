@@ -3,15 +3,15 @@ import {
   BrowserMicrophone,
   ErrDeviceNotSupported,
   ErrNoAudioConsent,
-  Segment,
+  type Segment,
 } from '@speechly/browser-client'
 import {
-  SpeechRecognitionEventCallback,
-  SpeechEndCallback,
-  SpeechErrorCallback,
-  SpeechRecognitionResult,
-  SpeechRecognitionClass,
-  SpeechRecognition,
+  type SpeechRecognitionEventCallback,
+  type SpeechEndCallback,
+  type SpeechErrorCallback,
+  type SpeechRecognitionResult,
+  type SpeechRecognitionClass,
+  type SpeechRecognition,
   MicrophoneNotAllowedError,
   SpeechRecognitionFailedError,
 } from './types'

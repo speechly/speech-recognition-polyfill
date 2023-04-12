@@ -8,8 +8,8 @@ Data associated with an error emitted from the recognition service
 
 ### Properties
 
-- [error](speechrecognitionerrorevent.md#error)
-- [message](speechrecognitionerrorevent.md#message)
+- [error](SpeechRecognitionErrorEvent.md#error)
+- [message](SpeechRecognitionErrorEvent.md#message)
 
 ## Properties
 
@@ -19,14 +19,18 @@ Data associated with an error emitted from the recognition service
 
 Type of error raised
 
-Defined in: [types.ts:61](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L61)
+#### Defined in
+
+[types.ts:61](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L61)
 
 ___
 
 ### message
 
-• **message**: *string*
+• **message**: `string`
 
 Message describing the error in more detail
 
-Defined in: [types.ts:65](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L65)
+#### Defined in
+
+[types.ts:65](https://github.com/speechly/speech-recognition-polyfill/blob/HEAD/src/types.ts#L65)
